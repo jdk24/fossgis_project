@@ -21,7 +21,9 @@ It is also the area of interest of an ongoing project by the German Federal Mini
 
 At the same time, while cycling has no direct adverse effect on the air quality - cyclists themselves are directly subjected to air pollution within a city, as cycle paths are usually in immediate proximity to roads. Analyzing and mapping this concentration and distribution of particulate matter - and to map a 'least-polluted' route through particularly affected areas - is a step towards informing about - and protecting users from - air pollution in the city of Stuttgart. 
 
-It is also a step towards informing decision-making processes e.g. for guiding the traffic of combustion engine vehicles and possibly enforce restrictions on it in order to reduce air pollution. 
+It is also a step towards informing decision-making processes e.g. for guiding the traffic of combustion engine vehicles and possibly enforce restrictions on it in order to reduce air pollution.
+
+It is vital for the analysis to combine official datasets with more extensive open source data, as a recent study on the impact of driving bans in Stuttgart states that "The sparsity \[of the sensor network\] introduces uncertainty which cannot be modeled correctly or can not be modeled at all"(Wolfmann et al 2019, pp. 295)
 
 The goal of this analysis is thus  to provide a small-scale geographic analysis of the particulate matter concentration in the city of Stuttgart; making the resulting map available on a user-interface; and allowing users to combine the results with a routing service informed by the result of the analysis.
 
@@ -87,6 +89,7 @@ Ristovski, Z. et al. (2012): Respiratory health effects of diesel particulate ma
 
 Li, L. et al. (2014): Fast Inverse Distance Weighting-Based Spatiotemporal Interpolation: A Web-Based Application of Interpolating Daily Fine Particulate Matter PM2.5 in the Contiguous U.S. Using Parallel Programming and k-d Tree. In: International Journal of Environmental Research and Public Health  2014, 11 (9), 9101-9141.
 
+Woltmann, L. et al. (2019): Assessing the Impact of Driving Bans with Data Analysis. In: H. Meyer et al. (Hrsg.): BTW 2019 — Workshopband, Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn 2019  287
 
 [1]https://postgis.net/docs/ST_Buffer.html
 [2]https://postgis.net/docs/RT_ST_InvDistWeight4ma.html
