@@ -89,7 +89,7 @@ Ristovski, Z. et al. (2012): Respiratory health effects of diesel particulate ma
 
 Li, L. et al. (2014): Fast Inverse Distance Weighting-Based Spatiotemporal Interpolation: A Web-Based Application of Interpolating Daily Fine Particulate Matter PM2.5 in the Contiguous U.S. Using Parallel Programming and k-d Tree. In: International Journal of Environmental Research and Public Health  2014, 11 (9), 9101-9141.
 
-Woltmann, L. et al. (2019): Assessing the Impact of Driving Bans with Data Analysis. In: H. Meyer et al. (Hrsg.): BTW 2019 — Workshopband, Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn 2019  287
+Woltmann, L. et al. (2019): Assessing the Impact of Driving Bans with Data Analysis. In: H. Meyer et al. (Hrsg.): BTW 2019 — Workshopband, Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn 2019  287. Online: https://dl.gi.de/bitstream/handle/20.500.12116/21819/G2-1.pdf?sequence=1
 
 [1]https://postgis.net/docs/ST_Buffer.html
 [2]https://postgis.net/docs/RT_ST_InvDistWeight4ma.html
