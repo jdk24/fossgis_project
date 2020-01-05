@@ -3,5 +3,9 @@ lubw.csv
 lubw.geojson
 luftdaten.csv
 luftdaten.geojson
+
+# folders
+config/
+GrassLocation/
 PERMANENT/
-amandusbutzer/
+amandus/
