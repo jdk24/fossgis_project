@@ -1,8 +1,6 @@
 #!/usr/bin/env python
-import zipfile
 
 import os
-from pathlib2 import Path
 import grass.script as g_script
 
 
@@ -96,8 +94,6 @@ def import_data():
     # list layers
     print('\nAvailable Layers:')
     g_script.run_command('g.list', type='vector,raster')
-
-
 
 
 if __name__ == '__main__':
