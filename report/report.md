@@ -8,7 +8,7 @@ besserer Titel? Routing?
 Irgend ein besserer Einleitungssatz als:
 
 Over the last few years, the city of Stuttgart has been in the focus of media and scientific interest due to increased
-levels of particulate matter (Quellen).
+levels of particulate matter.
 
 &nbsp;
 
@@ -27,7 +27,7 @@ and effects pregnancy, birth outcomes and male fertility (Heinrich et al 2005, p
 It is also the area of interest of an ongoing project by the German Federal Ministry of Transport and Digital
 Infrastructure (BMVI): The Satellite-based system for displaying, predicting and simulating air pollutants for
 sustainable urban and regional development ("Satellitenbasiertes System zur Anzeige, Prognose und Simulation
-von Luftschadstoffen f�r eine nachhaltige Stadt- und Regionalentwicklung - SAUBER").
+von Luftschadstoffen für eine nachhaltige Stadt- und Regionalentwicklung - SAUBER").
 
 At the same time, while cycling has no direct adverse effect on the air quality - cyclists themselves are directly
 subjected to air pollution within a city, as cycle paths are usually in immediate proximity to roads.
@@ -49,10 +49,9 @@ the results with a routing service informed by the result of the analysis.
 &nbsp;
 
 ## 2. Literature research
-Scheiss Literatur 
-
 Li et al. (2014) used inverse-distance kriging for interpolating particulate matter from point locations. 
 
+tbc
 
 &nbsp;
 
@@ -96,10 +95,8 @@ The hourly data can be categorized by using the _Common Air Quality Index_ (CAQI
 daily and hourly measures ([3])
 
 ### 3.2 Road network 
-OpenStreetMap highways = bicycle
-Auch highway = road?
 
-blabla
+Automatic download from OpenStreetMap
 
 ## 4. Analysis 
 
@@ -138,8 +135,7 @@ A part of the analysis will be to compare different methods offered by both GISs
 PM concentrations with the surrounding environment. 
 
 ### 4.4 Routing 
-
-lorem ipsum
+If possible
 
 ### 6. Sources 
 Heinrich, J. et al. (2005): Studies on health effects of transport-related air pollution. In: Krzyzanowski, M. et al.:
