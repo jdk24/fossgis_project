@@ -7,6 +7,7 @@
 
 -- Started on 2020-01-07 09:36:53
 
+CREATE EXTENSION postgis;
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
