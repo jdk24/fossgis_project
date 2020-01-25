@@ -9,3 +9,6 @@ config/
 GrassLocation/
 PERMANENT/
 amandus/
+project/webapp/node_modules
+webapp/node_modules
+project/scripts/luftdaten_backup.sql
