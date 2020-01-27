@@ -12,38 +12,35 @@
             >
                 <l-tile-layer :url="url"
                               :attribution="attribution"/>
-                <!--                <l-geo-json-->
-                <!--                        :geojson="geojson"-->
-                <!--                        :options="onEachFeatureFunction"-->
-                <!--                        :options-style="styleFunction"-->
-                <!--                />-->
                 <l-geo-json
+                        v-if="stuttgart.show"
                         :geojson="stuttgart.value"
-                        :options="onEachFeatureFunction"
+                        :options="onEachFeatureFunction()"
                         :options-style="styleFunction"
                 />
-                <l-geo-json
-                        v-show="districts.show"
-                        :geojson="districts_geojson"
-                        :options="onEachFeatureFunction"
-                        :options-style="styleFunction('hello')"
-                />
+<!--                <l-geo-json-->
+<!--                        v-show="districts.show"-->
+<!--                        :geojson="districts_geojson"-->
+<!--                        :options="onEachFeatureFunction()"-->
+<!--                        :options-style="styleFunction('hello')"-->
+<!--                />-->
                 <l-geo-json
                         v-if="route !== null"
                         :geojson="routeLine"
                         :options="onEachFeatureFunction()"
                         :options-style="styleFunction('line')"
                 />
-                <l-marker v-for="m in markersList"
+                <l-marker v-for="(m,i) in markersList"
                           :draggable="true"
                           :lat-lng.sync="m.position"
                           @dragend="dragEnd()"
+                          :key="'marker-'+i"
                 >
                 </l-marker>
             </l-map>
         </div>
         <div id="sidebar" class="sidebar" style="height: 100%; width: 25%; margin: 0;padding: 0; float: right">
-            <input type="checkbox" v-model="districts.show">
+            <input type="checkbox" v-model="stuttgart.show">
             <input type="text" v-model="api_key">
         </div>
     </div>
@@ -64,7 +61,12 @@
     }
 
     .app {
-        flex: auto;
+        display: flex;
         flex-direction: row;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
     }
 </style>
