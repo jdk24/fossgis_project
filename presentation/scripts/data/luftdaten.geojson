@@ -1,0 +1,2951 @@
+{
+	"type": "FeatureCollection",
+	"name": "luftdaten",
+	"crs": {
+		"type": "name",
+		"properties": {
+			"name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+		}
+	},
+	"features": [{
+			"type": "Feature",
+			"properties": {
+				"station_id": 296,
+				"time_stamp": "2019-12-11 14:55:14",
+				"altitude": 361.3,
+				"p10": 0.2,
+				"p25": 0.1,
+				"idpk": 1156
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 296,
+				"time_stamp": "2019-12-11 14:57:40",
+				"altitude": 361.3,
+				"p10": 0.2,
+				"p25": 0.1,
+				"idpk": 939
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1360,
+				"time_stamp": "2019-12-11 14:52:54",
+				"altitude": 232.9,
+				"p10": 0.2,
+				"p25": 0.2,
+				"idpk": 1352
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.204, 48.796]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3233,
+				"time_stamp": "2019-12-11 14:55:51",
+				"altitude": 268.3,
+				"p10": 0.3,
+				"p25": 0.2,
+				"idpk": 1079
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.208, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3233,
+				"time_stamp": "2019-12-11 14:53:16",
+				"altitude": 268.3,
+				"p10": 0.3,
+				"p25": 0.2,
+				"idpk": 1311
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.208, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3790,
+				"time_stamp": "2019-12-11 14:57:51",
+				"altitude": 346.0,
+				"p10": 0.4,
+				"p25": 0.3,
+				"idpk": 918
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.14, 48.806]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1360,
+				"time_stamp": "2019-12-11 14:55:31",
+				"altitude": 232.9,
+				"p10": 0.4,
+				"p25": 0.4,
+				"idpk": 1125
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.204, 48.796]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1360,
+				"time_stamp": "2019-12-11 14:57:58",
+				"altitude": 232.9,
+				"p10": 0.53,
+				"p25": 0.53,
+				"idpk": 909
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.204, 48.796]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 370,
+				"time_stamp": "2019-12-11 14:56:28",
+				"altitude": 297.4,
+				"p10": 0.85,
+				"p25": 0.8,
+				"idpk": 1023
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.15, 48.81]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4504,
+				"time_stamp": "2019-12-11 14:55:48",
+				"altitude": 314.8,
+				"p10": 1.35,
+				"p25": 1.12,
+				"idpk": 1092
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.172, 48.81]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3560,
+				"time_stamp": "2019-12-11 14:56:50",
+				"altitude": 290.2,
+				"p10": 3.1,
+				"p25": 1.13,
+				"idpk": 1003
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4504,
+				"time_stamp": "2019-12-11 14:53:21",
+				"altitude": 314.8,
+				"p10": 2.55,
+				"p25": 1.25,
+				"idpk": 1303
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.172, 48.81]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 370,
+				"time_stamp": "2019-12-11 14:54:01",
+				"altitude": 297.4,
+				"p10": 4.22,
+				"p25": 1.3,
+				"idpk": 1235
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.15, 48.81]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4641,
+				"time_stamp": "2019-12-11 14:56:07",
+				"altitude": 266.8,
+				"p10": 3.27,
+				"p25": 1.53,
+				"idpk": 1056
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.188, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4641,
+				"time_stamp": "2019-12-11 14:53:41",
+				"altitude": 266.8,
+				"p10": 4.7,
+				"p25": 1.57,
+				"idpk": 1264
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.188, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 5787,
+				"time_stamp": "2019-12-11 14:53:12",
+				"altitude": 270.2,
+				"p10": 3.67,
+				"p25": 1.7,
+				"idpk": 1328
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.168, 48.766]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4470,
+				"time_stamp": "2019-12-11 14:55:13",
+				"altitude": 269.9,
+				"p10": 2.23,
+				"p25": 1.73,
+				"idpk": 1158
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.166, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4470,
+				"time_stamp": "2019-12-11 14:57:39",
+				"altitude": 269.9,
+				"p10": 2.23,
+				"p25": 1.77,
+				"idpk": 941
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.166, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1149,
+				"time_stamp": "2019-12-11 14:56:12",
+				"altitude": 293.5,
+				"p10": 2.17,
+				"p25": 1.8,
+				"idpk": 1050
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.156, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 5787,
+				"time_stamp": "2019-12-11 14:55:40",
+				"altitude": 270.2,
+				"p10": 2.9,
+				"p25": 1.8,
+				"idpk": 1107
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.168, 48.766]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 319,
+				"time_stamp": "2019-12-11 14:54:35",
+				"altitude": 291.3,
+				"p10": 2.1,
+				"p25": 2.0,
+				"idpk": 1201
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.174, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4989,
+				"time_stamp": "2019-12-11 14:57:15",
+				"altitude": 303.9,
+				"p10": 3.13,
+				"p25": 2.1,
+				"idpk": 979
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.772]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4989,
+				"time_stamp": "2019-12-11 14:53:13",
+				"altitude": 303.9,
+				"p10": 4.3,
+				"p25": 2.2,
+				"idpk": 1323
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.772]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 13298,
+				"time_stamp": "2019-12-11 14:54:33",
+				"altitude": 896.8,
+				"p10": 5.53,
+				"p25": 2.3,
+				"idpk": 1204
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.792]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9763,
+				"time_stamp": "2019-12-11 14:55:36",
+				"altitude": 288.1,
+				"p10": 3.5,
+				"p25": 2.4,
+				"idpk": 1118
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.212, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 279,
+				"time_stamp": "2019-12-11 14:57:41",
+				"altitude": 310.0,
+				"p10": 5.15,
+				"p25": 2.45,
+				"idpk": 937
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.186, 48.768]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1149,
+				"time_stamp": "2019-12-11 14:53:27",
+				"altitude": 293.5,
+				"p10": 3.23,
+				"p25": 2.53,
+				"idpk": 1282
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.156, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 13298,
+				"time_stamp": "2019-12-11 14:56:59",
+				"altitude": 896.8,
+				"p10": 7.43,
+				"p25": 2.6,
+				"idpk": 992
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.792]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3560,
+				"time_stamp": "2019-12-11 14:54:24",
+				"altitude": 290.2,
+				"p10": 8.0,
+				"p25": 2.63,
+				"idpk": 1213
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3592,
+				"time_stamp": "2019-12-11 14:52:59",
+				"altitude": 315.2,
+				"p10": 7.3,
+				"p25": 2.63,
+				"idpk": 1344
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.774]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4212,
+				"time_stamp": "2019-12-11 14:56:13",
+				"altitude": 275.7,
+				"p10": 2.87,
+				"p25": 2.67,
+				"idpk": 1048
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.206, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3592,
+				"time_stamp": "2019-12-11 14:57:54",
+				"altitude": 315.2,
+				"p10": 8.73,
+				"p25": 2.9,
+				"idpk": 915
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.774]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3542,
+				"time_stamp": "2019-12-11 14:54:33",
+				"altitude": 297.2,
+				"p10": 5.0,
+				"p25": 2.97,
+				"idpk": 1205
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.812]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 17025,
+				"time_stamp": "2019-12-11 14:58:01",
+				"altitude": 273.4,
+				"p10": 8.45,
+				"p25": 3.0,
+				"idpk": 905
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16414529085, 48.784077488969999]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 279,
+				"time_stamp": "2019-12-11 14:55:10",
+				"altitude": 310.0,
+				"p10": 6.78,
+				"p25": 3.0,
+				"idpk": 1165
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.186, 48.768]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3592,
+				"time_stamp": "2019-12-11 14:55:27",
+				"altitude": 315.2,
+				"p10": 7.18,
+				"p25": 3.03,
+				"idpk": 1131
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.774]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3419,
+				"time_stamp": "2019-12-11 14:56:54",
+				"altitude": 301.7,
+				"p10": 6.23,
+				"p25": 3.03,
+				"idpk": 996
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.152, 48.774]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 17025,
+				"time_stamp": "2019-12-11 14:55:35",
+				"altitude": 273.4,
+				"p10": 8.88,
+				"p25": 3.08,
+				"idpk": 1121
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16414529085, 48.784077488969999]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 793,
+				"time_stamp": "2019-12-11 14:54:56",
+				"altitude": 293.0,
+				"p10": 4.35,
+				"p25": 3.1,
+				"idpk": 1182
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.158, 48.76]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1016,
+				"time_stamp": "2019-12-11 14:55:52",
+				"altitude": 308.0,
+				"p10": 5.8,
+				"p25": 3.13,
+				"idpk": 1074
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 793,
+				"time_stamp": "2019-12-11 14:57:22",
+				"altitude": 293.0,
+				"p10": 5.45,
+				"p25": 3.15,
+				"idpk": 966
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.158, 48.76]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4781,
+				"time_stamp": "2019-12-11 14:57:08",
+				"altitude": 345.6,
+				"p10": 5.06,
+				"p25": 3.18,
+				"idpk": 987
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.2, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 17025,
+				"time_stamp": "2019-12-11 14:53:10",
+				"altitude": 273.4,
+				"p10": 11.55,
+				"p25": 3.22,
+				"idpk": 1331
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16414529085, 48.784077488969999]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2331,
+				"time_stamp": "2019-12-11 14:54:42",
+				"altitude": 320.6,
+				"p10": 5.35,
+				"p25": 3.25,
+				"idpk": 1194
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.14, 48.806]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2433,
+				"time_stamp": "2019-12-11 14:53:24",
+				"altitude": 324.3,
+				"p10": 4.8,
+				"p25": 3.3,
+				"idpk": 1292
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.768]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3419,
+				"time_stamp": "2019-12-11 14:54:08",
+				"altitude": 301.7,
+				"p10": 7.6,
+				"p25": 3.3,
+				"idpk": 1229
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.152, 48.774]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4212,
+				"time_stamp": "2019-12-11 14:53:44",
+				"altitude": 275.7,
+				"p10": 3.7,
+				"p25": 3.33,
+				"idpk": 1259
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.206, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 11309,
+				"time_stamp": "2019-12-11 14:54:27",
+				"altitude": 295.3,
+				"p10": 6.25,
+				"p25": 3.4,
+				"idpk": 1207
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.17, 48.786]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 5477,
+				"time_stamp": "2019-12-11 14:56:09",
+				"altitude": 304.5,
+				"p10": 6.5,
+				"p25": 3.4,
+				"idpk": 1055
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.806]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4781,
+				"time_stamp": "2019-12-11 14:54:41",
+				"altitude": 345.6,
+				"p10": 6.74,
+				"p25": 3.52,
+				"idpk": 1196
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.2, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3542,
+				"time_stamp": "2019-12-11 14:56:58",
+				"altitude": 297.2,
+				"p10": 7.6,
+				"p25": 3.53,
+				"idpk": 994
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.812]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9406,
+				"time_stamp": "2019-12-11 14:56:36",
+				"altitude": 256.6,
+				"p10": 11.3,
+				"p25": 3.57,
+				"idpk": 1014
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.172, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 360,
+				"time_stamp": "2019-12-11 14:57:33",
+				"altitude": 271.1,
+				"p10": 7.6,
+				"p25": 3.6,
+				"idpk": 955
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.164, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2331,
+				"time_stamp": "2019-12-11 14:57:08",
+				"altitude": 320.6,
+				"p10": 10.63,
+				"p25": 3.65,
+				"idpk": 984
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.14, 48.806]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 20523,
+				"time_stamp": "2019-12-11 14:53:14",
+				"altitude": 339.6,
+				"p10": 7.63,
+				"p25": 3.8,
+				"idpk": 1315
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.192, 48.766]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 59,
+				"time_stamp": "2019-12-11 14:55:44",
+				"altitude": 280.8,
+				"p10": 7.9,
+				"p25": 3.8,
+				"idpk": 1099
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.156, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2433,
+				"time_stamp": "2019-12-11 14:55:50",
+				"altitude": 324.3,
+				"p10": 7.97,
+				"p25": 3.8,
+				"idpk": 1083
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.768]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1016,
+				"time_stamp": "2019-12-11 14:53:27",
+				"altitude": 308.0,
+				"p10": 6.87,
+				"p25": 3.8,
+				"idpk": 1284
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 381,
+				"time_stamp": "2019-12-11 14:55:31",
+				"altitude": 295.7,
+				"p10": 4.23,
+				"p25": 3.83,
+				"idpk": 1126
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.188, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 12843,
+				"time_stamp": "2019-12-11 14:55:18",
+				"altitude": 291.4,
+				"p10": 10.25,
+				"p25": 3.9,
+				"idpk": 1145
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.158, 48.774]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2206,
+				"time_stamp": "2019-12-11 14:53:12",
+				"altitude": 424.0,
+				"p10": 9.2,
+				"p25": 3.9,
+				"idpk": 1327
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.766]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 274,
+				"time_stamp": "2019-12-11 14:54:10",
+				"altitude": 297.5,
+				"p10": 9.57,
+				"p25": 3.9,
+				"idpk": 1225
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.152, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 469,
+				"time_stamp": "2019-12-11 14:56:40",
+				"altitude": 254.5,
+				"p10": 14.18,
+				"p25": 3.92,
+				"idpk": 1010
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.176, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 59,
+				"time_stamp": "2019-12-11 14:53:17",
+				"altitude": 280.8,
+				"p10": 5.7,
+				"p25": 3.97,
+				"idpk": 1308
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.156, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 12363,
+				"time_stamp": "2019-12-11 14:53:14",
+				"altitude": 246.0,
+				"p10": 7.93,
+				"p25": 4.0,
+				"idpk": 1316
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.176, 48.772]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 363,
+				"time_stamp": "2019-12-11 14:53:24",
+				"altitude": 269.1,
+				"p10": 5.83,
+				"p25": 4.1,
+				"idpk": 1294
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.172, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 274,
+				"time_stamp": "2019-12-11 14:56:36",
+				"altitude": 297.5,
+				"p10": 11.5,
+				"p25": 4.1,
+				"idpk": 1015
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.152, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1443,
+				"time_stamp": "2019-12-11 14:57:38",
+				"altitude": 354.6,
+				"p10": 6.53,
+				"p25": 4.13,
+				"idpk": 945
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.132, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 634,
+				"time_stamp": "2019-12-11 14:55:52",
+				"altitude": 304.4,
+				"p10": 5.87,
+				"p25": 4.13,
+				"idpk": 1075
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.148, 48.81]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 20523,
+				"time_stamp": "2019-12-11 14:55:40",
+				"altitude": 339.6,
+				"p10": 9.07,
+				"p25": 4.17,
+				"idpk": 1106
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.192, 48.766]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 7262,
+				"time_stamp": "2019-12-11 14:53:58",
+				"altitude": 272.2,
+				"p10": 8.5,
+				"p25": 4.2,
+				"idpk": 1245
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.166, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1443,
+				"time_stamp": "2019-12-11 14:55:13",
+				"altitude": 354.6,
+				"p10": 6.47,
+				"p25": 4.2,
+				"idpk": 1162
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.132, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 65,
+				"time_stamp": "2019-12-11 14:55:12",
+				"altitude": 282.5,
+				"p10": 10.83,
+				"p25": 4.23,
+				"idpk": 1163
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 634,
+				"time_stamp": "2019-12-11 14:53:26",
+				"altitude": 304.4,
+				"p10": 7.37,
+				"p25": 4.23,
+				"idpk": 1286
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.148, 48.81]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 20066,
+				"time_stamp": "2019-12-11 14:53:49",
+				"altitude": 286.5,
+				"p10": 12.15,
+				"p25": 4.28,
+				"idpk": 1256
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.176, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 65,
+				"time_stamp": "2019-12-11 14:57:38",
+				"altitude": 282.5,
+				"p10": 11.63,
+				"p25": 4.3,
+				"idpk": 946
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 11309,
+				"time_stamp": "2019-12-11 14:56:53",
+				"altitude": 295.3,
+				"p10": 16.58,
+				"p25": 4.32,
+				"idpk": 998
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.17, 48.786]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3588,
+				"time_stamp": "2019-12-11 14:53:16",
+				"altitude": 325.1,
+				"p10": 6.47,
+				"p25": 4.33,
+				"idpk": 1314
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.758]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 5286,
+				"time_stamp": "2019-12-11 14:55:07",
+				"altitude": 272.6,
+				"p10": 8.23,
+				"p25": 4.4,
+				"idpk": 1174
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.212, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 20157,
+				"time_stamp": "2019-12-11 14:57:58",
+				"altitude": 278.1,
+				"p10": 12.82,
+				"p25": 4.4,
+				"idpk": 908
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.162479639260001, 48.764922154819999]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 656,
+				"time_stamp": "2019-12-11 14:54:01",
+				"altitude": 280.7,
+				"p10": 6.63,
+				"p25": 4.43,
+				"idpk": 1238
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.156, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 20157,
+				"time_stamp": "2019-12-11 14:53:06",
+				"altitude": 278.1,
+				"p10": 15.05,
+				"p25": 4.47,
+				"idpk": 1337
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.162479639260001, 48.764922154819999]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2206,
+				"time_stamp": "2019-12-11 14:55:38",
+				"altitude": 424.0,
+				"p10": 9.3,
+				"p25": 4.5,
+				"idpk": 1111
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.766]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 12363,
+				"time_stamp": "2019-12-11 14:55:41",
+				"altitude": 246.0,
+				"p10": 8.57,
+				"p25": 4.5,
+				"idpk": 1104
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.176, 48.772]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 10554,
+				"time_stamp": "2019-12-11 14:57:42",
+				"altitude": 280.3,
+				"p10": 8.9,
+				"p25": 4.53,
+				"idpk": 933
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.172, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 353,
+				"time_stamp": "2019-12-11 14:57:21",
+				"altitude": 236.8,
+				"p10": 5.63,
+				"p25": 4.6,
+				"idpk": 967
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.236, 48.802]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 127,
+				"time_stamp": "2019-12-11 14:52:56",
+				"altitude": 382.6,
+				"p10": 16.98,
+				"p25": 4.75,
+				"idpk": 1347
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.212, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 563,
+				"time_stamp": "2019-12-11 14:56:51",
+				"altitude": 271.2,
+				"p10": 9.77,
+				"p25": 4.77,
+				"idpk": 999
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.168, 48.772]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 20066,
+				"time_stamp": "2019-12-11 14:56:20",
+				"altitude": 286.5,
+				"p10": 15.45,
+				"p25": 4.78,
+				"idpk": 1036
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.176, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 7765,
+				"time_stamp": "2019-12-11 14:57:12",
+				"altitude": 274.7,
+				"p10": 7.7,
+				"p25": 4.8,
+				"idpk": 982
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.17, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 5534,
+				"time_stamp": "2019-12-11 14:56:49",
+				"altitude": 260.7,
+				"p10": 12.4,
+				"p25": 4.8,
+				"idpk": 1005
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.19, 48.784]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 753,
+				"time_stamp": "2019-12-11 14:53:43",
+				"altitude": 296.1,
+				"p10": 8.27,
+				"p25": 4.83,
+				"idpk": 1263
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.766]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 387,
+				"time_stamp": "2019-12-11 14:53:33",
+				"altitude": 273.4,
+				"p10": 10.2,
+				"p25": 4.87,
+				"idpk": 1268
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.186, 48.772]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 13627,
+				"time_stamp": "2019-12-11 14:56:50",
+				"altitude": 257.1,
+				"p10": 10.5,
+				"p25": 4.93,
+				"idpk": 1002
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.1721877, 48.7793801]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2582,
+				"time_stamp": "2019-12-11 14:57:35",
+				"altitude": 312.4,
+				"p10": 8.7,
+				"p25": 4.93,
+				"idpk": 953
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.19, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 127,
+				"time_stamp": "2019-12-11 14:55:23",
+				"altitude": 382.6,
+				"p10": 7.12,
+				"p25": 5.0,
+				"idpk": 1133
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.212, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 363,
+				"time_stamp": "2019-12-11 14:55:49",
+				"altitude": 269.1,
+				"p10": 6.67,
+				"p25": 5.0,
+				"idpk": 1085
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.172, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3588,
+				"time_stamp": "2019-12-11 14:55:42",
+				"altitude": 325.1,
+				"p10": 9.47,
+				"p25": 5.0,
+				"idpk": 1103
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.146, 48.758]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 849,
+				"time_stamp": "2019-12-11 14:53:23",
+				"altitude": 256.0,
+				"p10": 6.9,
+				"p25": 5.07,
+				"idpk": 1297
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.216, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 5286,
+				"time_stamp": "2019-12-11 14:57:33",
+				"altitude": 272.6,
+				"p10": 10.87,
+				"p25": 5.07,
+				"idpk": 957
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.212, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 7262,
+				"time_stamp": "2019-12-11 14:56:26",
+				"altitude": 272.2,
+				"p10": 8.3,
+				"p25": 5.07,
+				"idpk": 1033
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.166, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2582,
+				"time_stamp": "2019-12-11 14:55:09",
+				"altitude": 312.4,
+				"p10": 6.83,
+				"p25": 5.07,
+				"idpk": 1170
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.19, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9481,
+				"time_stamp": "2019-12-11 14:54:50",
+				"altitude": 237.7,
+				"p10": 9.97,
+				"p25": 5.1,
+				"idpk": 1187
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.21, 48.796]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 563,
+				"time_stamp": "2019-12-11 14:54:26",
+				"altitude": 271.2,
+				"p10": 9.83,
+				"p25": 5.1,
+				"idpk": 1210
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.168, 48.772]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 10554,
+				"time_stamp": "2019-12-11 14:55:16",
+				"altitude": 280.3,
+				"p10": 10.33,
+				"p25": 5.13,
+				"idpk": 1149
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.172, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 387,
+				"time_stamp": "2019-12-11 14:55:59",
+				"altitude": 273.4,
+				"p10": 11.2,
+				"p25": 5.33,
+				"idpk": 1064
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.186, 48.772]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 753,
+				"time_stamp": "2019-12-11 14:56:10",
+				"altitude": 296.1,
+				"p10": 10.0,
+				"p25": 5.37,
+				"idpk": 1053
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.766]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 7765,
+				"time_stamp": "2019-12-11 14:54:45",
+				"altitude": 274.7,
+				"p10": 8.87,
+				"p25": 5.4,
+				"idpk": 1191
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.17, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9481,
+				"time_stamp": "2019-12-11 14:57:16",
+				"altitude": 237.7,
+				"p10": 13.17,
+				"p25": 5.4,
+				"idpk": 976
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.21, 48.796]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1250,
+				"time_stamp": "2019-12-11 14:56:26",
+				"altitude": 270.0,
+				"p10": 7.73,
+				"p25": 5.47,
+				"idpk": 1030
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.166, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 360,
+				"time_stamp": "2019-12-11 14:55:07",
+				"altitude": 271.1,
+				"p10": 8.43,
+				"p25": 5.47,
+				"idpk": 1175
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.164, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9340,
+				"time_stamp": "2019-12-11 14:53:22",
+				"altitude": 296.2,
+				"p10": 9.03,
+				"p25": 5.5,
+				"idpk": 1299
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.226, 48.756]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1250,
+				"time_stamp": "2019-12-11 14:53:59",
+				"altitude": 270.0,
+				"p10": 11.93,
+				"p25": 5.53,
+				"idpk": 1244
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.166, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 127,
+				"time_stamp": "2019-12-11 14:57:50",
+				"altitude": 382.6,
+				"p10": 12.82,
+				"p25": 5.57,
+				"idpk": 920
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.212, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 849,
+				"time_stamp": "2019-12-11 14:55:49",
+				"altitude": 256.0,
+				"p10": 6.6,
+				"p25": 5.6,
+				"idpk": 1090
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.216, 48.78]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1466,
+				"time_stamp": "2019-12-11 14:53:29",
+				"altitude": 266.3,
+				"p10": 15.43,
+				"p25": 5.6,
+				"idpk": 1280
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.166, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4863,
+				"time_stamp": "2019-12-11 14:54:05",
+				"altitude": 265.4,
+				"p10": 9.53,
+				"p25": 5.63,
+				"idpk": 1233
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.206, 48.784]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 15572,
+				"time_stamp": "2019-12-11 14:53:30",
+				"altitude": 302.6,
+				"p10": 10.43,
+				"p25": 5.67,
+				"idpk": 1277
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.148, 48.81]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2243,
+				"time_stamp": "2019-12-11 14:55:36",
+				"altitude": 249.0,
+				"p10": 6.77,
+				"p25": 5.7,
+				"idpk": 1120
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.232, 48.812]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 1466,
+				"time_stamp": "2019-12-11 14:55:58",
+				"altitude": 266.3,
+				"p10": 13.23,
+				"p25": 5.7,
+				"idpk": 1067
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.166, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 10094,
+				"time_stamp": "2019-12-11 14:53:03",
+				"altitude": 216.7,
+				"p10": 10.8,
+				"p25": 5.77,
+				"idpk": 1341
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.226, 48.82]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3261,
+				"time_stamp": "2019-12-11 14:53:19",
+				"altitude": 276.6,
+				"p10": 8.1,
+				"p25": 5.77,
+				"idpk": 1307
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.156, 48.76]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3261,
+				"time_stamp": "2019-12-11 14:55:46",
+				"altitude": 276.6,
+				"p10": 12.1,
+				"p25": 5.8,
+				"idpk": 1097
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.156, 48.76]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 119,
+				"time_stamp": "2019-12-11 14:56:35",
+				"altitude": 283.4,
+				"p10": 9.32,
+				"p25": 5.87,
+				"idpk": 1016
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.246, 48.808]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 353,
+				"time_stamp": "2019-12-11 14:54:48",
+				"altitude": 236.8,
+				"p10": 9.73,
+				"p25": 5.9,
+				"idpk": 1189
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.236, 48.802]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 5534,
+				"time_stamp": "2019-12-11 14:54:22",
+				"altitude": 260.7,
+				"p10": 11.67,
+				"p25": 5.97,
+				"idpk": 1216
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.19, 48.784]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 132,
+				"time_stamp": "2019-12-11 14:53:14",
+				"altitude": 348.7,
+				"p10": 11.15,
+				"p25": 6.0,
+				"idpk": 1319
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.2, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2243,
+				"time_stamp": "2019-12-11 14:53:09",
+				"altitude": 249.0,
+				"p10": 13.17,
+				"p25": 6.1,
+				"idpk": 1333
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.232, 48.812]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 132,
+				"time_stamp": "2019-12-11 14:55:59",
+				"altitude": 348.7,
+				"p10": 13.73,
+				"p25": 6.1,
+				"idpk": 1062
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.2, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 592,
+				"time_stamp": "2019-12-11 14:54:13",
+				"altitude": 284.1,
+				"p10": 10.4,
+				"p25": 6.1,
+				"idpk": 1223
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.174, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 656,
+				"time_stamp": "2019-12-11 14:56:27",
+				"altitude": 280.7,
+				"p10": 7.5,
+				"p25": 6.2,
+				"idpk": 1027
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.156, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2904,
+				"time_stamp": "2019-12-11 14:57:54",
+				"altitude": 260.7,
+				"p10": 15.13,
+				"p25": 6.2,
+				"idpk": 914
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.196, 48.788]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 592,
+				"time_stamp": "2019-12-11 14:56:40",
+				"altitude": 284.1,
+				"p10": 11.57,
+				"p25": 6.27,
+				"idpk": 1011
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.174, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3655,
+				"time_stamp": "2019-12-11 14:52:53",
+				"altitude": 292.9,
+				"p10": 10.37,
+				"p25": 6.3,
+				"idpk": 1355
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9340,
+				"time_stamp": "2019-12-11 14:55:48",
+				"altitude": 296.2,
+				"p10": 10.2,
+				"p25": 6.33,
+				"idpk": 1091
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.226, 48.756]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3655,
+				"time_stamp": "2019-12-11 14:55:19",
+				"altitude": 292.9,
+				"p10": 8.97,
+				"p25": 6.37,
+				"idpk": 1140
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4919,
+				"time_stamp": "2019-12-11 14:53:32",
+				"altitude": 238.2,
+				"p10": 12.93,
+				"p25": 6.53,
+				"idpk": 1270
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.202, 48.792]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 11487,
+				"time_stamp": "2019-12-11 14:53:50",
+				"altitude": 281.3,
+				"p10": 11.27,
+				"p25": 6.57,
+				"idpk": 1253
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.208, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4863,
+				"time_stamp": "2019-12-11 14:56:31",
+				"altitude": 265.4,
+				"p10": 10.67,
+				"p25": 6.57,
+				"idpk": 1021
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.206, 48.784]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 5332,
+				"time_stamp": "2019-12-11 14:57:17",
+				"altitude": 304.8,
+				"p10": 14.47,
+				"p25": 6.63,
+				"idpk": 975
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.758]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 13627,
+				"time_stamp": "2019-12-11 14:54:24",
+				"altitude": 257.1,
+				"p10": 20.52,
+				"p25": 6.68,
+				"idpk": 1214
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.1721877, 48.7793801]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 11487,
+				"time_stamp": "2019-12-11 14:56:16",
+				"altitude": 281.3,
+				"p10": 11.8,
+				"p25": 6.8,
+				"idpk": 1045
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.208, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 975,
+				"time_stamp": "2019-12-11 14:55:37",
+				"altitude": 290.7,
+				"p10": 12.48,
+				"p25": 6.82,
+				"idpk": 1116
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.152, 48.76]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 975,
+				"time_stamp": "2019-12-11 14:53:07",
+				"altitude": 290.7,
+				"p10": 16.23,
+				"p25": 6.87,
+				"idpk": 1335
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.152, 48.76]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4919,
+				"time_stamp": "2019-12-11 14:55:59",
+				"altitude": 238.2,
+				"p10": 16.17,
+				"p25": 7.03,
+				"idpk": 1061
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.202, 48.792]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2267,
+				"time_stamp": "2019-12-11 14:55:57",
+				"altitude": 228.5,
+				"p10": 11.23,
+				"p25": 7.23,
+				"idpk": 1070
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.23, 48.816]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4266,
+				"time_stamp": "2019-12-11 14:54:00",
+				"altitude": 313.4,
+				"p10": 12.27,
+				"p25": 7.4,
+				"idpk": 1243
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.816]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3638,
+				"time_stamp": "2019-12-11 14:57:57",
+				"altitude": 283.1,
+				"p10": 14.07,
+				"p25": 7.4,
+				"idpk": 911
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.244, 48.82]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3655,
+				"time_stamp": "2019-12-11 14:57:45",
+				"altitude": 292.9,
+				"p10": 14.33,
+				"p25": 7.5,
+				"idpk": 926
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.776]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9656,
+				"time_stamp": "2019-12-11 14:55:16",
+				"altitude": 240.9,
+				"p10": 13.2,
+				"p25": 7.57,
+				"idpk": 1150
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.236, 48.802]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 6479,
+				"time_stamp": "2019-12-11 14:56:41",
+				"altitude": 281.9,
+				"p10": 13.13,
+				"p25": 7.67,
+				"idpk": 1008
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.158, 48.814]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2267,
+				"time_stamp": "2019-12-11 14:53:30",
+				"altitude": 228.5,
+				"p10": 11.2,
+				"p25": 7.73,
+				"idpk": 1278
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.23, 48.816]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 119,
+				"time_stamp": "2019-12-11 14:54:09",
+				"altitude": 283.4,
+				"p10": 8.6,
+				"p25": 7.78,
+				"idpk": 1227
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.246, 48.808]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9656,
+				"time_stamp": "2019-12-11 14:57:42",
+				"altitude": 240.9,
+				"p10": 10.4,
+				"p25": 7.9,
+				"idpk": 935
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.236, 48.802]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 6479,
+				"time_stamp": "2019-12-11 14:54:13",
+				"altitude": 281.9,
+				"p10": 16.87,
+				"p25": 7.97,
+				"idpk": 1224
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.158, 48.814]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3638,
+				"time_stamp": "2019-12-11 14:55:14",
+				"altitude": 283.1,
+				"p10": 14.9,
+				"p25": 8.2,
+				"idpk": 1154
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.244, 48.82]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3364,
+				"time_stamp": "2019-12-11 14:53:50",
+				"altitude": 234.1,
+				"p10": 13.3,
+				"p25": 8.38,
+				"idpk": 1255
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.228, 48.804]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 12070,
+				"time_stamp": "2019-12-11 14:53:23",
+				"altitude": 279.4,
+				"p10": 19.73,
+				"p25": 8.43,
+				"idpk": 1295
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.808]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 7186,
+				"time_stamp": "2019-12-11 14:57:44",
+				"altitude": 223.9,
+				"p10": 16.47,
+				"p25": 8.57,
+				"idpk": 928
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.216, 48.8]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 128,
+				"time_stamp": "2019-12-11 14:55:42",
+				"altitude": 353.5,
+				"p10": 33.97,
+				"p25": 8.63,
+				"idpk": 1102
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.198, 48.77]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3364,
+				"time_stamp": "2019-12-11 14:56:26",
+				"altitude": 234.1,
+				"p10": 10.93,
+				"p25": 8.75,
+				"idpk": 1029
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.228, 48.804]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3436,
+				"time_stamp": "2019-12-11 14:56:19",
+				"altitude": 279.0,
+				"p10": 16.8,
+				"p25": 8.9,
+				"idpk": 1039
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 7186,
+				"time_stamp": "2019-12-11 14:52:53",
+				"altitude": 223.9,
+				"p10": 16.03,
+				"p25": 9.0,
+				"idpk": 1356
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.216, 48.8]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 6285,
+				"time_stamp": "2019-12-11 14:56:06",
+				"altitude": 220.1,
+				"p10": 17.9,
+				"p25": 9.03,
+				"idpk": 1057
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.22, 48.804]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3436,
+				"time_stamp": "2019-12-11 14:53:53",
+				"altitude": 279.0,
+				"p10": 25.7,
+				"p25": 9.13,
+				"idpk": 1249
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.778]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 7186,
+				"time_stamp": "2019-12-11 14:55:19",
+				"altitude": 223.9,
+				"p10": 23.47,
+				"p25": 9.2,
+				"idpk": 1142
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.216, 48.8]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4303,
+				"time_stamp": "2019-12-11 14:55:51",
+				"altitude": 258.3,
+				"p10": 20.07,
+				"p25": 9.33,
+				"idpk": 1080
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.21, 48.79]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3240,
+				"time_stamp": "2019-12-11 14:55:41",
+				"altitude": 257.6,
+				"p10": 21.7,
+				"p25": 9.4,
+				"idpk": 1105
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.21, 48.79]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 20173,
+				"time_stamp": "2019-12-11 14:57:23",
+				"altitude": 237.6,
+				"p10": 27.1,
+				"p25": 9.53,
+				"idpk": 964
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.19673144817, 48.789460591050002]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2904,
+				"time_stamp": "2019-12-11 14:55:28",
+				"altitude": 260.7,
+				"p10": 16.47,
+				"p25": 9.6,
+				"idpk": 1129
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.196, 48.788]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 4266,
+				"time_stamp": "2019-12-11 14:56:26",
+				"altitude": 313.4,
+				"p10": 16.8,
+				"p25": 9.63,
+				"idpk": 1032
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.154, 48.816]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3273,
+				"time_stamp": "2019-12-11 14:54:54",
+				"altitude": 264.0,
+				"p10": 16.7,
+				"p25": 9.97,
+				"idpk": 1184
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.2, 48.788]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 21496,
+				"time_stamp": "2019-12-11 14:54:05",
+				"altitude": 282.1,
+				"p10": 25.12,
+				"p25": 10.1,
+				"idpk": 1232
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.15812641382, 48.813150397469997]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3273,
+				"time_stamp": "2019-12-11 14:57:20",
+				"altitude": 264.0,
+				"p10": 18.83,
+				"p25": 10.1,
+				"idpk": 969
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.2, 48.788]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 21496,
+				"time_stamp": "2019-12-11 14:56:31",
+				"altitude": 282.1,
+				"p10": 18.95,
+				"p25": 10.38,
+				"idpk": 1020
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.15812641382, 48.813150397469997]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 2904,
+				"time_stamp": "2019-12-11 14:53:03",
+				"altitude": 260.7,
+				"p10": 24.17,
+				"p25": 10.4,
+				"idpk": 1342
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.196, 48.788]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 6285,
+				"time_stamp": "2019-12-11 14:53:39",
+				"altitude": 220.1,
+				"p10": 19.03,
+				"p25": 10.43,
+				"idpk": 1265
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.22, 48.804]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 6652,
+				"time_stamp": "2019-12-11 14:56:24",
+				"altitude": 263.1,
+				"p10": 33.5,
+				"p25": 10.65,
+				"idpk": 1034
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.19, 48.802]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 6652,
+				"time_stamp": "2019-12-11 14:53:57",
+				"altitude": 263.1,
+				"p10": 29.37,
+				"p25": 10.73,
+				"idpk": 1246
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.19, 48.802]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 94,
+				"time_stamp": "2019-12-11 14:55:51",
+				"altitude": 264.1,
+				"p10": 12.83,
+				"p25": 10.8,
+				"idpk": 1078
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.168, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3240,
+				"time_stamp": "2019-12-11 14:53:12",
+				"altitude": 257.6,
+				"p10": 20.9,
+				"p25": 10.9,
+				"idpk": 1329
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.21, 48.79]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 6953,
+				"time_stamp": "2019-12-11 14:54:14",
+				"altitude": 255.1,
+				"p10": 19.83,
+				"p25": 11.03,
+				"idpk": 1218
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.204, 48.81]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 12070,
+				"time_stamp": "2019-12-11 14:55:49",
+				"altitude": 279.4,
+				"p10": 24.8,
+				"p25": 11.27,
+				"idpk": 1087
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.16, 48.808]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 94,
+				"time_stamp": "2019-12-11 14:53:25",
+				"altitude": 264.1,
+				"p10": 13.87,
+				"p25": 11.53,
+				"idpk": 1287
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.168, 48.764]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9596,
+				"time_stamp": "2019-12-11 14:53:43",
+				"altitude": 243.5,
+				"p10": 19.23,
+				"p25": 11.6,
+				"idpk": 1262
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.208, 48.794]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 9596,
+				"time_stamp": "2019-12-11 14:56:10",
+				"altitude": 243.5,
+				"p10": 21.83,
+				"p25": 11.73,
+				"idpk": 1054
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.208, 48.794]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 6953,
+				"time_stamp": "2019-12-11 14:56:40",
+				"altitude": 255.1,
+				"p10": 21.83,
+				"p25": 11.93,
+				"idpk": 1012
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.204, 48.81]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 96,
+				"time_stamp": "2019-12-11 14:57:46",
+				"altitude": 244.2,
+				"p10": 26.47,
+				"p25": 12.93,
+				"idpk": 923
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.192, 48.786]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 96,
+				"time_stamp": "2019-12-11 14:52:54",
+				"altitude": 244.2,
+				"p10": 30.2,
+				"p25": 13.4,
+				"idpk": 1350
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.192, 48.786]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 96,
+				"time_stamp": "2019-12-11 14:55:20",
+				"altitude": 244.2,
+				"p10": 28.97,
+				"p25": 13.73,
+				"idpk": 1138
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.192, 48.786]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3005,
+				"time_stamp": "2019-12-11 14:57:44",
+				"altitude": 237.4,
+				"p10": 27.13,
+				"p25": 13.9,
+				"idpk": 929
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.21, 48.796]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3310,
+				"time_stamp": "2019-12-11 14:54:57",
+				"altitude": 222.5,
+				"p10": 18.52,
+				"p25": 14.4,
+				"idpk": 1180
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.21, 48.806]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3005,
+				"time_stamp": "2019-12-11 14:55:17",
+				"altitude": 237.4,
+				"p10": 27.07,
+				"p25": 14.87,
+				"idpk": 1146
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.21, 48.796]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 3310,
+				"time_stamp": "2019-12-11 14:57:30",
+				"altitude": 222.5,
+				"p10": 20.12,
+				"p25": 15.7,
+				"idpk": 960
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.21, 48.806]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 11067,
+				"time_stamp": "2019-12-11 14:55:09",
+				"altitude": 260.0,
+				"p10": 28.83,
+				"p25": 15.8,
+				"idpk": 1171
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.208, 48.788]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"station_id": 11067,
+				"time_stamp": "2019-12-11 14:57:35",
+				"altitude": 260.0,
+				"p10": 26.67,
+				"p25": 17.6,
+				"idpk": 951
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [9.208, 48.788]
+			}
+		}
+	]
+}
