@@ -115,6 +115,12 @@ def interpolate(skip):
                 overwrite=True
             )
 
+#         TODO
+#         used commands to get vector from interpolated raster
+#         r.to.vect
+
+#         v.out.ogr
+# /Applications/QGIS3.8.app/Contents/MacOS/bin/ogr2ogr rst_poly_reprojected.geojson -s_srs "EPSG:25832" -t_srs "EPSG:4326" rst_polys.geojson
 
 if __name__ == '__main__':
     init()
