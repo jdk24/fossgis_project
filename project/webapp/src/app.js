@@ -32,6 +32,11 @@ export default {
                 url: "http://localhost:8080/geoserver/project/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=project%3Astuttgart&maxFeatures=50&outputFormat=application%2Fjson",
                 value: null
             },
+            pm_10: {
+                show: false,
+                url: "http://localhost:8080/geoserver/project/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=project%3Apm10_view&outputFormat=application%2Fjson",
+                value: null
+            },
             route: null,
             api_key: "5b3ce3597851110001cf624800f6a2b28a4041cc8f798263c7a1ea8f",
             markers: [],
