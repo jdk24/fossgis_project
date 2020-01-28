@@ -4,6 +4,8 @@ lubw.csv
 lubw.geojson
 luftdaten.csv
 luftdaten.geojson
+*_p10.geojson
+*_p10_4326.geojson
 
 # folders
 config/

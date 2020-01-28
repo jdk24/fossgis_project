@@ -7,9 +7,10 @@ import grass.script as g_script
 def init():
     # setup folder names
     os.chdir("../.")
-    global base_directory, config_folder
+    global base_directory, data_folder, config_folder
     base_directory = os.getcwd()
-    config_folder = base_directory + '/data/config/'
+    data_folder = base_directory + '/data/'
+    config_folder = data_folder + 'config/'
 
 
 def switch_mapset():
@@ -29,8 +30,8 @@ def switch_mapset():
     user_list = [x for x in user_list if x != u'PERMANENT']
 
     if not user_list:
-        answer = raw_input('You currently have no user mapset. If you don\'t create a user mapset the PERMANENT mapset will'
-                       'be used. Do you want to create a user mapset?(Y/n)')
+        answer = raw_input('You currently have no user mapset. If you don\'t create a user mapset the PERMANENT '
+                           'mapset will be used. Do you want to create a user mapset?(Y/n)')
         if answer != 'n':
             user = raw_input('Name the mapset:').rstrip()
             g_script.run_command(
@@ -104,6 +105,40 @@ def interpolate(skip):
                 rules=config_folder + 'pm_10_hourly.txt',
                 overwrite=True
             )
+
+            # convert raster to vector
+            g_script.run_command(
+                'r.to.vect',
+                input='{}_p10_caqi_hourly'.format(name),
+                output='{}_p10_caqi_hourly_vec'.format(name),
+                type='area',
+                overwrite=True
+            )
+
+            # generalize polygons
+            g_script.run_command(
+                'v.generalize',
+                input='{}_p10_caqi_hourly_vec'.format(name),
+                output='{}_p10_caqi_hourly_vec_simple'.format(name),
+                method='douglas',
+                threshold=20,
+                type='area',
+                overwrite=True
+            )
+
+            # save to geojson
+            g_script.run_command(
+                'v.out.ogr',
+                input='{}_p10_caqi_hourly_vec_simple'.format(name),
+                output='{}{}_p10.geojson'.format(data_folder, name),
+                format='GeoJSON',
+                output_type='boundary',
+                overwrite=True
+            )
+
+            # reproject geojson
+            os.popen('ogr2ogr -overwrite {0}{1}_p10_4326.geojson -s_srs "EPSG:25832" '
+                     '-t_srs "EPSG:4326" {0}{1}_p10.geojson'.format(data_folder, name))
 
 
 if __name__ == '__main__':
