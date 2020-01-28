@@ -18,12 +18,11 @@
                         :options="onEachFeatureFunction()"
                         :options-style="styleFunction"
                 />
-<!--                <l-geo-json-->
-<!--                        v-show="districts.show"-->
-<!--                        :geojson="districts_geojson"-->
-<!--                        :options="onEachFeatureFunction()"-->
-<!--                        :options-style="styleFunction('hello')"-->
-<!--                />-->
+                <l-geo-json
+                        :geojson="avoidPolygons"
+                        :options="onEachFeatureFunction()"
+                        :options-style="styleFunction('avoid')"
+                />
                 <l-geo-json
                         v-if="route !== null"
                         :geojson="routeLine"
@@ -42,6 +41,14 @@
         <div id="sidebar" class="sidebar" style="height: 100%; width: 25%; margin: 0;padding: 0; float: right">
             <input type="checkbox" v-model="stuttgart.show">
             <input type="text" v-model="api_key">
+            <v-slider
+                    v-model="pm"
+                    :tick-labels="['very low', 'low','medium', 'high', 'very high']"
+                    :max="3"
+                    step="1"
+                    ticks="always"
+                    tick-size="2"
+            ></v-slider>
         </div>
     </div>
 </template>
@@ -49,6 +56,8 @@
 
 </script>
 <style>
+    @import '~vuetify/dist/vuetify.css';
+
     body {
         padding: 0;
         margin: 0;

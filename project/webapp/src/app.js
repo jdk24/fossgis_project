@@ -1,13 +1,17 @@
 import * as L from "leaflet"
 import {LMap, LTileLayer, LGeoJson, LPopup, LMarker} from "vue2-leaflet"
+import {VSlider} from "vuetify"
 import axios from "axios"
 import geojson from "./static/stuttgart"
+import avoids from "./static/avoids"
+
 
 let ors = require("openrouteservice-js")
 
 export default {
     components: {
-        "l-map": LMap, "l-tile-layer": LTileLayer, "l-geo-json": LGeoJson, "l-popup": LPopup, "l-marker": LMarker
+        "l-map": LMap, "l-tile-layer": LTileLayer, "l-geo-json": LGeoJson, "l-popup": LPopup, "l-marker": LMarker,
+        "v-slider": VSlider
     }, data() {
         return {
             routeInstance: null,
@@ -41,7 +45,11 @@ export default {
             api_key: "5b3ce3597851110001cf624800f6a2b28a4041cc8f798263c7a1ea8f",
             markers: [],
             contextMenu: false,
-            start: false
+            start: false,
+            avoids: avoids,
+            avoid_category: 2,
+            pm: 'very low'
+
         }
     }, created() {
 
@@ -68,17 +76,7 @@ export default {
                 this.routeInstance.calculate({
                     coordinates: [[start.position.lng, start.position.lat], [end.position.lng, end.position.lat]],
                     profile: "cycling-regular",
-                    avoid_polygons: {
-                        type: "Polygon", coordinates: [
-                            [
-                                [8.683533668518066, 49.41987949639816],
-                                [8.680272102355957, 49.41812070066643],
-                                [8.683919906616211, 49.4132348262363],
-                                [8.689756393432617, 49.41806486484901],
-                                [8.683533668518066, 49.41987949639816]
-                            ]
-                        ]
-                    },
+                    avoid_polygons: this.avoidPolygons,
                     format: "geojson",
                     instructions: false
                 }).then(function (json) {
@@ -90,6 +88,18 @@ export default {
             }, 300)
         }
     }, computed: {
+        avoidPolygons() {
+            let coordinates = []
+            for (let f of avoids.features) {
+                if (Math.floor(f.properties.value) === this.avoid_category) {
+                    coordinates.push(f.geometry.coordinates)
+                }
+            }
+            return {
+                type: 'MultiPolygon',
+                coordinates: coordinates
+            }
+        },
         markersList() {
             return this.markers
         }, routeLine() {
@@ -102,9 +112,13 @@ export default {
                     return {
                         weight: 4, color: "#10b617", opacity: 0.8
                     }
+                } else if (obj === "avoid") {
+                    return {
+                        weight: 2, color: "#f14159", opacity: 0.7, fillColor: "#f14159", fillOpacity: 0.2
+                    }
                 } else {
                     return {
-                        weight: 2, color: "#ECEFF1", opacity: 0.7, fillColor: fillColor, fillOpacity: 0.2
+                            weight: 2, color: "#ECEFF1", opacity: 0.7, fillColor: fillColor, fillOpacity: 0.2
                     }
                 }
             }

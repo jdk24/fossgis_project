@@ -68,6 +68,28 @@ def interpolate(skip):
             overwrite=True
         )
 
+        # bspline interpolation
+        g_script.run_command(
+            'v.surf.bspline',
+            input='luftdaten@PERMANENT',
+            column='p10',
+            raster_output='bspline_p10',
+            ns_step=50,
+            ew_step=50,
+            overwrite=True
+        )
+
+        # rst interpolation
+        g_script.run_command(
+            'v.surf.rst',
+            input='luftdaten@PERMANENT',
+            zcolumn='p10',
+            elevation='rst_p10',
+            segmax=10,
+            npmin=50,
+            overwrite=True
+        )
+
         # reclassify to CAQI categories
         for name in [
             'idw',
