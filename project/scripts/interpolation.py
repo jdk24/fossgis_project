@@ -118,9 +118,9 @@ def interpolate(skip):
 #         TODO
 #         used commands to get vector from interpolated raster
 #         r.to.vect
-
-#         v.out.ogr
-# /Applications/QGIS3.8.app/Contents/MacOS/bin/ogr2ogr rst_poly_reprojected.geojson -s_srs "EPSG:25832" -t_srs "EPSG:4326" rst_polys.geojson
+#         v.generalize input=rst_polygons@amandus type=area output=rst_dp_20 method=douglas threshold=20
+#         v.out.ogr --overwrite input=rst_dp_20@amandus output=/Users/amandusbutzer/Workspaces/fossgis_project/project/data/rst_polys.geojson format=GeoJSON output_type=boundary
+#         ogr2ogr rst_poly_reprojected.geojson -s_srs "EPSG:25832" -t_srs "EPSG:4326" rst_polys.geojson
 
 if __name__ == '__main__':
     init()

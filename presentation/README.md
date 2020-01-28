@@ -1,14 +1,15 @@
 # Project Files
 
 Contains the following:
-- data: lubw and luftdaten station information for one day
+- data: lubw and luftdaten station information for one day as well as the geometry of the enclosing city districts
+  used to calculate the Grass location extent
 - GrassLocation: well the GrassLocation for Stuttgart
 - scripts: there are scripts inside
 
 ## Getting started
 
 1. Start a Grass session using the GrassLocation folder as Location.
-(Alternatively Create a new Location called GrassLocation with name Stuttgart as UTM 32N WGS84)
+(Alternatively Create a new Location called **GrassLocation** with name **Stuttgart** as **UTM 32N WGS84**)
 2. Copy lubw.csv lubw.geojson luftdaten.csv luftdaten.geojson to the data folder
 (2.1 Start PyCharm or your favorite Python IDE from the Grass Terminal for full command support)
 3. Run `scripts/2_setup.py` to initialize the project.
