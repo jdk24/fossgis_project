@@ -1,6 +1,6 @@
 <template>
-    <div id="app" class="app" style="height: 100%; width: 100%; margin: 0;padding: 0">
-        <div style="height: 100%; width: 75%; margin: 0;padding: 0">
+    <div id="app" class="app" >
+        <div class="map">
             <l-map
                     style="height: 100%; width: 100%"
                     :zoom="zoom"
@@ -38,16 +38,43 @@
                 </l-marker>
             </l-map>
         </div>
-        <div id="sidebar" class="sidebar" style="height: 100%; width: 25%; margin: 0;padding: 0; float: right">
+        <div id="sidebar" class="sidebar" style="">
+            <h3>Healthy routing</h3>
+            Find a healthy bicycle route through Stuttgart city using openrouteservice by avoiding areas of higher
+            particulate matter concentration.
             <input type="checkbox" v-model="stuttgart.show">
             <input type="text" v-model="api_key">
+            <div> Particle matter concentration to avoid</div>
             <v-slider
+                    id="pm-slider"
+                    class="slider"
                     v-model="pm"
-                    :tick-labels="['very low', 'low','medium', 'high', 'very high']"
-                    :max="3"
-                    step="1"
-                    ticks="always"
-                    tick-size="2"
+                    :data="['very low', 'low','medium', 'high', 'very high']"
+                    :ticks="'always'"
+                    :tooltip="'none'"
+                    :duration="0.3"
+                    :marks="true"
+                    :adsorb="true"
+                    :tick-size="2"
+                    :width="'80%'"
+                    :height="'5px'"
+                    :useKeyboard="true"
+            ></v-slider>
+            <div> Time of the day
+            </div>
+            <v-slider
+                    class="slider"
+                    v-model="hour"
+                    :data="Array.from({length:24},(v,k)=>k)"
+                    :ticks="'always'"
+                    :tooltip="'focus'"
+                    :duration="0.3"
+                    :marks="hourSliderLable()"
+                    :adsorb="true"
+                    :tick-size="2"
+                    :width="'80%'"
+                    :height="'5px'"
+                    :useKeyboard="true"
             ></v-slider>
         </div>
     </div>
@@ -56,26 +83,6 @@
 
 </script>
 <style>
-    @import '~vuetify/dist/vuetify.css';
-
-    body {
-        padding: 0;
-        margin: 0;
-    }
-
-    html, body {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-    }
-
-    .app {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .sidebar {
-        display: flex;
-        flex-direction: column;
-    }
+    @import '~vue-slider-component/theme/default.css';
+    @import 'app.css';
 </style>

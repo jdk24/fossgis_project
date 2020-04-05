@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Project to compare and join official with open source atmospheric data to offer healthy bicycle routing.",
   "main": "src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jdk24/fossgis_project"
+  },
   "dependencies": {
     "@vue/cli": "^4.1.1",
     "@vue/cli-service": "^4.1.1",
@@ -11,7 +15,7 @@
     "openrouteservice-js": "^0.1.3",
     "vue": "^2.6.10",
     "vue2-leaflet": "^2.2.1",
-    "vuetify": "^2.2.6"
+    "vue-slider-component": "^3.1.1"
   },
   "devDependencies": {},
   "scripts": {

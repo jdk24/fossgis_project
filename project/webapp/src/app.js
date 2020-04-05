@@ -1,6 +1,6 @@
 import * as L from "leaflet"
 import {LMap, LTileLayer, LGeoJson, LPopup, LMarker} from "vue2-leaflet"
-import {VSlider} from "vuetify"
+import VueSlider from "vue-slider-component"
 import axios from "axios"
 import geojson from "./static/stuttgart"
 import avoids from "./static/avoids"
@@ -11,7 +11,7 @@ let ors = require("openrouteservice-js")
 export default {
     components: {
         "l-map": LMap, "l-tile-layer": LTileLayer, "l-geo-json": LGeoJson, "l-popup": LPopup, "l-marker": LMarker,
-        "v-slider": VSlider
+        "v-slider": VueSlider
     }, data() {
         return {
             routeInstance: null,
@@ -42,18 +42,24 @@ export default {
                 value: null
             },
             route: null,
-            api_key: "5b3ce3597851110001cf624800f6a2b28a4041cc8f798263c7a1ea8f",
+            api_key: "5b3ce3597851110001cf62483a54ed1a0e2342048e6c89f8c2f42286",
             markers: [],
             contextMenu: false,
             start: false,
             avoids: avoids,
             avoid_category: 2,
-            pm: 'very low'
+            pm: 'very low',
+            hour: 12
 
         }
     }, created() {
 
     }, methods: {
+        hourSliderLable() {
+            return (val) => {
+                return [0, 6, 12, 18, 23].includes(val)
+            }
+        },
         dragEnd() {
             this.computeRoute()
         }, rightClick(event) {
@@ -147,6 +153,8 @@ export default {
             context.districts.value = response.data.features[0]
             context.districts.show = true
 
+        }).catch(error => {
+            console.log('Stuttgart districts could not be loaded.', error.message, '. Check if geoserver is running.')
         })
         axios.get(context.stuttgart.url, {
             transformResponse: undefined, headers: {
@@ -156,6 +164,8 @@ export default {
             context.stuttgart.value = response.data.features[0]
             context.stuttgart.show = true
 
+        }).catch(error => {
+            console.log('Stuttgart boundary could not be loaded.', error.message, '. Check if geoserver is running.')
         })
     }
 }
