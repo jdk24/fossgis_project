@@ -2,8 +2,8 @@ import * as L from "leaflet"
 import {LMap, LTileLayer, LGeoJson, LPopup, LMarker} from "vue2-leaflet"
 import VueSlider from "vue-slider-component"
 import axios from "axios"
-import geojson from "./static/stuttgart"
-import avoids from "./static/avoids"
+import stuttgart from "./assets/stuttgart"
+import avoids from "./assets/avoids"
 
 
 let ors = require("openrouteservice-js")
@@ -14,6 +14,7 @@ export default {
         "v-slider": VueSlider
     }, data() {
         return {
+            dataUrl: 'https://raw.githubusercontent.com/jdk24/fossgis_project/master/project/data/',
             routeInstance: null,
             url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
             zoom: 13,
@@ -22,23 +23,33 @@ export default {
             style: {
                 weight: 2, color: "#ECEFF1", opacity: 1, fillOpacity: 1
             },
-            geojson: geojson,
+            geojson: stuttgart,
             enableTooltip: false,
             color: "#5175ff",
             fillColor: "#5175ff",
             districts: {
                 show: false,
-                url: "http://localhost:8080/geoserver/project/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=project%3Astuttgart_districts&maxFeatures=50&outputFormat=application%2Fjson",
+                path: "http://localhost:8080/geoserver/project/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=project%3Astuttgart_districts&maxFeatures=50&outputFormat=application%2Fjson",
                 value: null
             },
             stuttgart: {
                 show: false,
-                url: "http://localhost:8080/geoserver/project/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=project%3Astuttgart&maxFeatures=50&outputFormat=application%2Fjson",
+                path: "http://localhost:8080/geoserver/project/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=project%3Astuttgart&maxFeatures=50&outputFormat=application%2Fjson",
+                value: null
+            },
+            stations: {
+                show: false,
+                path: '',
                 value: null
             },
             pm_10: {
                 show: false,
-                url: "http://localhost:8080/geoserver/project/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=project%3Apm10_view&outputFormat=application%2Fjson",
+                path: "http://localhost:8080/geoserver/project/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=project%3Apm10_view&outputFormat=application%2Fjson",
+                value: null
+            },
+            pm_25: {
+                show: false,
+                path: "l",
                 value: null
             },
             route: null,
@@ -48,13 +59,34 @@ export default {
             start: false,
             avoids: avoids,
             avoid_category: 2,
-            pm: 'very low',
+            eaqi: 'Moderate',
             hour: 12
-
         }
     }, created() {
 
     }, methods: {
+        fetchStations() {
+            if (this.stations.show) {
+                let hour = this.hour.toString()
+                if (this.hour < 10) {
+                    hour = '0' + hour
+                }
+                axios.get(this.dataUrl + 'geojsons/avg_' + hour + '_hrs.geojson').then(response => {
+                    this.stations.value = response.data
+
+                }).catch(error => {
+                    console.log('Stuttgart districts could not be loaded.', error.message, '. Check if geoserver is running.')
+                    this.stations.value = null
+                })
+            } else {
+                this.stations.value = null
+            }
+        },
+        fetchAssets(name){
+            axios.get('this.baseUrl + name').then(response => {
+                console.log(response);
+            })
+        },
         hourSliderLable() {
             return (val) => {
                 return [0, 6, 12, 18, 23].includes(val)
@@ -145,23 +177,15 @@ export default {
     }, mounted() {
         let context = this
         this.routeInstance = new ors.Directions({api_key: this.api_key})
-        axios.get(context.districts.url, {
-            transformResponse: undefined, headers: {
-                "Access-Control-Allow-Origin": "*", crossdomain: true
-            }
-        }).then(response => {
-            context.districts.value = response.data.features[0]
+        axios.get(this.dataUrl + 'stuttgart.geojson').then(response => {
+            context.districts.value = response.data
             context.districts.show = true
 
         }).catch(error => {
             console.log('Stuttgart districts could not be loaded.', error.message, '. Check if geoserver is running.')
         })
-        axios.get(context.stuttgart.url, {
-            transformResponse: undefined, headers: {
-                "Access-Control-Allow-Origin": "*", crossdomain: true
-            }
-        }).then(response => {
-            context.stuttgart.value = response.data.features[0]
+        axios.get(this.dataUrl + 'stuttgart_districts_old_backup.geojson').then(response => {
+            context.stuttgart.value = response.data
             context.stuttgart.show = true
 
         }).catch(error => {

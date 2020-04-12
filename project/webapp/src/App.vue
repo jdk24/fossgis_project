@@ -13,15 +13,15 @@
                 <l-tile-layer :url="url"
                               :attribution="attribution"/>
                 <l-geo-json
+                        :geojson="avoidPolygons"
+                        :options="onEachFeatureFunction()"
+                        :options-style="styleFunction('avoid')"
+                />
+                <l-geo-json
                         v-if="stuttgart.show"
                         :geojson="stuttgart.value"
                         :options="onEachFeatureFunction()"
                         :options-style="styleFunction"
-                />
-                <l-geo-json
-                        :geojson="avoidPolygons"
-                        :options="onEachFeatureFunction()"
-                        :options-style="styleFunction('avoid')"
                 />
                 <l-geo-json
                         v-if="route !== null"
@@ -36,20 +36,27 @@
                           :key="'marker-'+i"
                 >
                 </l-marker>
+                <l-geo-json
+                        :geojson="stations.value"
+                        :options-style="styleFunction"
+                ></l-geo-json>
             </l-map>
         </div>
         <div id="sidebar" class="sidebar" style="">
-            <h3>Healthy routing</h3>
+            <h3>Healthy routing in Stuttgart city</h3>
             Find a healthy bicycle route through Stuttgart city using openrouteservice by avoiding areas of higher
             particulate matter concentration.
-            <input type="checkbox" v-model="stuttgart.show">
-            <input type="text" v-model="api_key">
-            <div> Particle matter concentration to avoid</div>
+            <label>
+                Show research area
+                <input type="checkbox" v-model="stuttgart.show">
+            </label>
+<!--            <input type="text" v-model="api_key">-->
+            <div> Lowest Air Quality Index level to avoid</div>
             <v-slider
                     id="pm-slider"
                     class="slider"
-                    v-model="pm"
-                    :data="['very low', 'low','medium', 'high', 'very high']"
+                    v-model="eaqi"
+                    :data="['Fair', 'Moderate','Poor', 'Very poor', 'Extr. poor']"
                     :ticks="'always'"
                     :tooltip="'none'"
                     :duration="0.3"
@@ -75,7 +82,12 @@
                     :width="'80%'"
                     :height="'5px'"
                     :useKeyboard="true"
+                    @change="fetchStations"
             ></v-slider>
+            <label>
+                Show stations
+                <input type="checkbox" v-model="stations.show" @change="fetchStations">
+            </label>
         </div>
     </div>
 </template>

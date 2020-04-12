@@ -5,6 +5,8 @@ besserer Titel? Routing?
 
 ## 1. Introduction
 
+
+
 Irgend ein besserer Einleitungssatz als:
 
 Over the last few years, the city of Stuttgart has been in the focus of media and scientific interest due to increased
@@ -59,6 +61,10 @@ tbc
 ## 3. Data 
 ### 3.1 Particulate matter
 
+_Q: Which data sets did you choose to represent those factors and why?_
+
+_Q: Are they sufficient?_ 
+
 Air quality measurements in Stuttgart and the State of Baden-Württemberg is conducted by the State Office for
 the Environment, Measurements and Nature Conservation of the Federal State of Baden-Württemberg (LUBW).
 The LUBW operates 44 measuring stations within the State of Baden-Württemberg, with 5 stations
@@ -91,23 +97,20 @@ to benefit from using aggregate data, the project's aim is to use hourly data fr
 Additionally, subsequent analyses based on this project can utilize different queries on Luftdaten.info APIs in terms
 of geographical area, temporal resolution, etc. with little effort. 
 
-The hourly data can be categorized by using the _Common Air Quality Index_ (CAQI) which was standardized for yearly,
-daily and hourly measures ([3])
-
 ### 3.2 Road network 
 
 Automatic download from OpenStreetMap
 
-## 4. Analysis 
+## 4. Methods 
 
 ### 4.1 Download and pre-processing
 For the automated download of both the air quality and road network data, both Windows or Linux operating systems
 provide adequate tools like wget or curl, whose behaviour can be controlled via simple scripting e.g. in bash.
 For an automated, scheduled download, tools like cron or Windows Task Scheduler can be used to initiate
 the finished script.
-To store the expectedly numerous datasets, a database, including a fitting data-model will be implemented.
+To store the expected numerous datasets, a database, including a fitting data-model will be implemented.
 PostGIS, an extension to the Free and Open Source relational Database Management System PostgreSQL, offers support
-of geographic data types and simple georgraphical analyses. 
+of geographic data types and simple geographical analyses. 
 Before ingesting the data, the raw downloaded files data then need to be parsed and pre-processed
 for the subsequent analysis.
 Both the Python and PostgreSQL's PL/pgSQL scripting language offer support for the xml data of the LUBW and
@@ -120,8 +123,8 @@ simple statistical methods, which can be implemented directly in the database or
  
 ### 4.3 Interpolation
 Air quality and air pollution are spatio-temporal  ('4-D') data. Meanwhile, the measurements of air pollution by
-official or distributed measuring stations are point-data.  
-An analysis of the concentation of particulate matter within the city of Stuttgart needs to interpolate the measured
+official or distributed measuring stations are point-data.
+An analysis of the concentration of particulate matter within the city of Stuttgart needs to interpolate the measured
 concentration of particulate matter at one station with its surrounding environment.
 Within its scope, this analysis aims for a two dimensional modelling of the atmospheric concentration of PM via Free
 and Open Source GIS. 
@@ -134,8 +137,60 @@ Inverse Cost Weighting; the latter of which can take into account cost surfaces,
 A part of the analysis will be to compare different methods offered by both GISs of interpolating the measured
 PM concentrations with the surrounding environment. 
 
+### 4.4 Categorization
+
+To facilitate the identification and graphical representation of polluted areas,
+the interpolated data is further categorized using the European Air Quality Index (EAQI).
+The index is specifically developed for short-term air quality situations and is therefore
+the appropriate choice for the calculated hourly mean data set.
+The basis for the calculation of the EAQI are the concentration values of
+up to five key pollutants, namely particulate matter (PM10), fine particulate matter (PM2.5),
+ozone (O3), nitrogen dioxide (NO2) and sulphur dioxide (SO2).
+The poorest level in any of the pollutants is decisive for the index level and it can therefore
+be used for single pollutants as well.
+The driver of the index is the relative risks associated to short-term exposure to PM2.5
+as defined by the Health Risk of Air Pollution in Europe project (HRAPIE project).
+According to the report for an increase of 10yg/m3 in PM2.5, a higher daily mortality of up to 1.23% is estimated
+for different urban agglomerations in developed countries (WHO 2013).
+
+The index levels are derived from this factor and the PM2.5 concentration
+values correspond to the following air quality standard:
+
+- 0 - 10: Good
+- 10 - 20: Fair
+- 20 - 25: Moderate
+- 25 - 50: Poor
+- 50 - 75: Very Poor
+- 75 - 800: Extremely Poor
+ 
+These categories are applied to the interpolated concentration raster using
+blabla functions
+which are then converted to vector geometries using TODO: GRASS functions.
+At this point the edges follow the pixel borders. As we are working with
+interpolated values pixel-perfect precision is not required. Therefore
+the vector geometries need to be simplified which also reduces the file size
+significantly.
+The resulting polygons are subsequently exported as geojson and transformed
+to EPSG:4326 projection to enable "avoid routing" in the webapp.
+
+
 ### 4.4 Routing 
 If possible
+
+### 5. Results
+
+### 6. Discussion 
+_How reliable are the results?_
+
+_What are the limits of your analysis?_
+
+_What should be done better next time or in a future study?_
+
+### 7. Conclusion
+_Q: What is the answer to your question?_
+
+TODO: Mention removal of "Feinstaubalarm"? -> Applicability of Analysis for other cities!
+
 
 ### 6. Sources 
 Heinrich, J. et al. (2005): Studies on health effects of transport-related air pollution. In: Krzyzanowski, M. et al.:
@@ -155,6 +210,13 @@ Woltmann, L. et al. (2019): Assessing the Impact of Driving Bans with Data Analy
 BTW 2019 — Workshopband, Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn 2019  287.
 Online: https://dl.gi.de/bitstream/handle/20.500.12116/21819/G2-1.pdf?sequence=1
 
+WHO, Regional office for Europe (2013): Health risks of air pollution in Europe – HRAPIE project.
+Recommendations for concentration–response functions for cost–benefit analysis of
+particulate matter, ozone and nitrogen dioxide.
+http://www.euro.who.int/__data/assets/pdf_file/0006/238956/Health_risks_air_pollution_HRAPIE_project.pdf?ua=1
+
+
 [1]https://postgis.net/docs/ST_Buffer.html
 [2]https://postgis.net/docs/RT_ST_InvDistWeight4ma.html
 [3]http://www.airqualitynow.eu/about_indices_definition.php
+
