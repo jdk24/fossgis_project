@@ -18,3 +18,5 @@ project/scripts/luftdaten_backup.sql
 report/schaubild.xlsx
 report/~$port_butzer_kaeflein.docx
 report/~$schaubild.xlsx
+report/~WRL1429.tmp
+*.tmp
