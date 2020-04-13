@@ -71,9 +71,8 @@ export default {
                 if (this.hour < 10) {
                     hour = '0' + hour
                 }
-                axios.get(this.dataUrl + 'geojsons/avg_' + hour + '_hrs.geojson').then(response => {
+                axios.get(this.dataUrl + 'pm25/avg_' + hour + '_hrs.geojson').then(response => {
                     this.stations.value = response.data
-
                 }).catch(error => {
                     console.log('Stuttgart districts could not be loaded.', error.message, '. Check if geoserver is running.')
                     this.stations.value = null

@@ -179,12 +179,17 @@ If possible
 
 ### 5. Results
 
+
+
 ### 6. Discussion 
 _How reliable are the results?_
 
-_What are the limits of your analysis?_
+_What are the limitations of your analysis?_
 
 _What should be done better next time or in a future study?_
+
+Feinstaubalarm usually due to atmospheric conditions. Average values do not reflect these.
+
 
 ### 7. Conclusion
 _Q: What is the answer to your question?_
