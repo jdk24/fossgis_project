@@ -7,7 +7,6 @@ body {
 html, body {
     height: 100%;
     width: 100%;
-    /*margin: 0;*/
 }
 
 .app {
@@ -37,7 +36,45 @@ html, body {
     float: right
 }
 
+.sidebar h3{
+    text-align: center;
+}
+
+.sidebar p{
+    text-align: justify;
+    margin: 8px 8px;
+}
+.label{
+    font-size: smaller;
+    margin: 12px 8px 0 8px;
+}
+
+.sidebar label{
+    text-align: justify;
+    margin: 3px 8px;
+    font-size: small
+}
+
+.settings {
+    text-align: center;
+}
+
 .slider {
     align-self: center;
     margin-bottom: 25px;
+}
+
+.slider div{
+    font-size: x-small;
+}
+
+.routeOutlet {
+    text-align: center;
+    font-style: oblique;
+    margin: 1rem 8px 8px 8px;
+    flex-grow: 1;
+}
+
+.routeOutlet div {
+    font-size: smaller;
 }

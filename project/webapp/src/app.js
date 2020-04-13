@@ -1,9 +1,7 @@
 import * as L from "leaflet"
-import {LMap, LTileLayer, LGeoJson, LPopup, LMarker} from "vue2-leaflet"
+import {LMap, LTileLayer, LGeoJson, LPopup, LMarker , LCircleMarker} from "vue2-leaflet"
 import VueSlider from "vue-slider-component"
 import axios from "axios"
-import stuttgart from "./assets/stuttgart"
-import avoids from "./assets/avoids"
 
 
 let ors = require("openrouteservice-js")
@@ -11,7 +9,7 @@ let ors = require("openrouteservice-js")
 export default {
     components: {
         "l-map": LMap, "l-tile-layer": LTileLayer, "l-geo-json": LGeoJson, "l-popup": LPopup, "l-marker": LMarker,
-        "v-slider": VueSlider
+        "v-slider": VueSlider, "l-circle-marker": LCircleMarker
     }, data() {
         return {
             dataUrl: 'https://raw.githubusercontent.com/jdk24/fossgis_project/master/project/data/',
@@ -23,8 +21,8 @@ export default {
             style: {
                 weight: 2, color: "#ECEFF1", opacity: 1, fillOpacity: 1
             },
-            geojson: stuttgart,
             enableTooltip: false,
+            categories:['Fair', 'Moderate','Poor', 'Very poor', 'Extremely poor'],
             color: "#5175ff",
             fillColor: "#5175ff",
             districts: {
@@ -57,24 +55,32 @@ export default {
             markers: [],
             contextMenu: false,
             start: false,
-            avoids: avoids,
             avoid_category: 2,
             eaqi: 'Moderate',
-            hour: 12
+            hour: 9,
+            requestStats: {}
         }
     }, created() {
 
     }, methods: {
+        changeHour() {
+            axios.get(this.dataUrl + 'avg_'+  this.hourString +'_hrs_pm25_rst.geojson').then(response => {
+                this.pm_25.value = response.data
+            }).catch(error => {
+                console.log('Pollution polygons could not be loaded.', error.message, '. Check if geoserver is running.')
+            })
+            this.computeRoute()
+            this.fetchStations()
+        },
+        changeCategory() {
+            this.computeRoute()
+        },
         fetchStations() {
             if (this.stations.show) {
-                let hour = this.hour.toString()
-                if (this.hour < 10) {
-                    hour = '0' + hour
-                }
-                axios.get(this.dataUrl + 'pm25/avg_' + hour + '_hrs.geojson').then(response => {
+                axios.get(this.dataUrl + 'pm25/avg_' + this.hourString + '_hrs.geojson').then(response => {
                     this.stations.value = response.data
                 }).catch(error => {
-                    console.log('Stuttgart districts could not be loaded.', error.message, '. Check if geoserver is running.')
+                    console.log('Stations could not be loaded.', error.message, '. Check if geoserver is running.')
                     this.stations.value = null
                 })
             } else {
@@ -86,7 +92,7 @@ export default {
                 console.log(response);
             })
         },
-        hourSliderLable() {
+        hourSliderLabel() {
             return (val) => {
                 return [0, 6, 12, 18, 23].includes(val)
             }
@@ -110,32 +116,61 @@ export default {
             setTimeout(() => {
                 let start = this.markers[0]
                 let end = this.markers[1]
-                this.routeInstance.calculate({
+                let options = {
                     coordinates: [[start.position.lng, start.position.lat], [end.position.lng, end.position.lat]],
                     profile: "cycling-regular",
-                    avoid_polygons: this.avoidPolygons,
                     format: "geojson",
                     instructions: false
-                }).then(function (json) {
+                }
+                if (this.avoidPolygons !== null) {
+                    options.avoid_polygons = this.avoidPolygons
+                }
+                this.routeInstance.calculate(options).then(function (json) {
                     context.route = json.features[0].geometry
+                    context.requestStats = {
+                        msg: json.message,
+                        dist: Math.floor(json.features[0].properties.summary.distance),
+                        dur:  Math.floor(json.features[0].properties.summary.duration)
+                    }
                 }).catch(function (err) {
-                    let str = "An error occured: " + err
-                    console.log(str)
+                    let str = "An error occured: " + err.message
+                    context.requestStats = {
+                        msg: str
+                    }
                 })
             }, 300)
         }
     }, computed: {
         avoidPolygons() {
             let coordinates = []
-            for (let f of avoids.features) {
-                if (Math.floor(f.properties.value) === this.avoid_category) {
-                    coordinates.push(f.geometry.coordinates)
+            if (this.pm_25.value) {
+                for (let f of this.pm_25.value.features) {
+                    if (Math.floor(f.properties.value) >= this.indexCategory) {
+                        coordinates.push(f.geometry.coordinates)
+                    }
+                }
+                if (coordinates.length !== 0) {
+                    return  {
+                        type: 'MultiPolygon',
+                        coordinates: coordinates
+                    }
                 }
             }
             return {
-                type: 'MultiPolygon',
-                coordinates: coordinates
+                type: 'Polygon',
+                coordinates: [[[0,0],[0,0.0000001],[0.00000001,0],[0,0]]]
             }
+        },
+        hourString() {
+            let hour = this.hour.toString()
+            if (this.hour < 10) {
+                hour = '0' + hour
+            }
+            return hour
+        },
+        indexCategory() {
+            let key = this.eaqi.substr(0,3)
+            return this.categories.findIndex((e) => e.startsWith(key)) + 2  // Fair == 2
         },
         markersList() {
             return this.markers
@@ -152,6 +187,10 @@ export default {
                 } else if (obj === "avoid") {
                     return {
                         weight: 2, color: "#f14159", opacity: 0.7, fillColor: "#f14159", fillOpacity: 0.2
+                    }
+                } else if (obj === "stuttgart") {
+                    return {
+                        weight: 3, color: "#468df1", opacity: 0.4, fillColor: "#fff", fillOpacity: 0
                     }
                 } else {
                     return {
@@ -177,15 +216,21 @@ export default {
         let context = this
         this.routeInstance = new ors.Directions({api_key: this.api_key})
         axios.get(this.dataUrl + 'stuttgart.geojson').then(response => {
-            context.districts.value = response.data
-            context.districts.show = true
+            context.stuttgart.value = response.data
 
         }).catch(error => {
             console.log('Stuttgart districts could not be loaded.', error.message, '. Check if geoserver is running.')
         })
+
         axios.get(this.dataUrl + 'stuttgart_districts_old_backup.geojson').then(response => {
-            context.stuttgart.value = response.data
-            context.stuttgart.show = true
+            context.districts.value = response.data
+
+        }).catch(error => {
+            console.log('Stuttgart boundary could not be loaded.', error.message, '. Check if geoserver is running.')
+        })
+
+        axios.get(this.dataUrl + 'avg_09_hrs_pm25_rst.geojson').then(response => {
+            context.pm_25.value = response.data
 
         }).catch(error => {
             console.log('Stuttgart boundary could not be loaded.', error.message, '. Check if geoserver is running.')
