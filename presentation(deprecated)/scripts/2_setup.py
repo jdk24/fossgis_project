@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-from os import path
-
 import os
 import grass.script as g_script
 
@@ -68,7 +66,7 @@ def write_config_files():
     Writes the config files according to the CAQI according to http://www.airqualitynow.eu/about_indices_definition.php
     to the folder data/config if they do not exist.
     """
-    if not path.isdir(data_folder + "config"):
+    if not os.path.isdir(data_folder + "config"):
         print("Creating config directory and files ...")
         config_folder = data_folder + 'config/'
         os.mkdir(config_folder)
