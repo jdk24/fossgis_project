@@ -106,6 +106,8 @@ def interpolate(layer, i_method, column_name, pollutant_config):
                 elevation=temp_name,
                 segmax=10,
                 npmin=50,
+                smooth=0.1,
+                tension=100,
                 overwrite=True,
                 quiet=True if run_quiet else False
             )

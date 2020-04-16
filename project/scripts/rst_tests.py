@@ -17,7 +17,6 @@ def init():
 
 
 def switch_mapset():
-
     global user
     # set user from current mapset
     user = g_script.read_command(
@@ -59,68 +58,42 @@ def switch_mapset():
     print('Switched to {}'.format(user))
 
 
-def interpolate(layer, power, npoints, out_folder):
+def interpolate(layer, tension, smoothing, out_folder):
     """
-    Interpolates an existing vector point layer using either inverse distance weighting,
-    bi-linear splines or regularized splines with tension. The column name of the values that should be interpolated
-    needs to be passed as well as the category config for the pollutant that is interpolated e.g. 'pm25'.
-    The config files can be found in the data/config folder.
+    Interpolates an existing vector point layer using regularized splines with tension.
     :param layer: str - existing vector point layer with values to interpolate
-    :param value1: str - value to test interpolation methods with
-    :param column_name: str - name of the value column in the input layer
-    :param pollutant_config: str - name of the config in data/config folder to use for reclassification
+    :param tension: str - value to test interpolation methods with
+    :param smoothing: str - name of the value column in the input layer
+    :param out_folder: str - name of the config in data/config folder to use for reclassification
     """
-    temp_name = '{}_{}_{}'.format(layer, npoints, power)
+    temp_name = 'rst_{}_{}'.format(tension, smoothing)
     out_folder += '/'
     # idw interpolation
     g_script.run_command(
-        'v.surf.idw',
-        flags='n',
+        'v.surf.rst',
         input='{}@PERMANENT'.format(layer),
-        column='avg_pm25',
-        output=temp_name,
-        power=power,
+        zcolumn='avg_pm25',
+        elevation=temp_name,
+        segmax=10,
+        npmin=50,
+        tension=tension,
+        smooth=smoothing,
         overwrite=True,
         quiet=True if run_quiet else False
     )
-    # g_script.run_command(
-    #     'v.surf.bspline',
-    #     input='{}@PERMANENT'.format(layer),
-    #     column='avg_pm25',
-    #     raster_output=temp_name,
-    #     ns_step=50,
-    #     ew_step=50,
-    #     overwrite=True,
-    #     quiet=True if run_quiet else False
-    # )
 
-    if not os.path.isdir(data_folder + out_folder):
-        os.mkdir(data_folder + out_folder)
+    if keep_intermediates:
+        if not os.path.isdir(data_folder + out_folder):
+            os.mkdir(data_folder + out_folder)
 
-    g_script.run_command(
-        'r.out.gdal',
-        input=temp_name,
-        output='{}{}/{}.png'.format(data_folder, out_folder, temp_name),
-        format='PNG',
-        type='Float64',
-        overwrite=True
-    )
-    # bspline interpolation
-    # elif i_method == 'bspline':
-
-    #
-    # # rst interpolation
-    # elif i_method == 'rst':
-    #     g_script.run_command(
-    #         'v.surf.rst',
-    #         input='{}@PERMANENT'.format(layer),
-    #         zcolumn=column_name,
-    #         elevation=temp_name,
-    #         segmax=10,
-    #         npmin=50,
-    #         overwrite=True,
-    #         quiet=True if run_quiet else False
-    #     )
+        g_script.run_command(
+            'r.out.gdal',
+            input=temp_name,
+            output='{}{}{}.png'.format(data_folder, out_folder, temp_name),
+            format='PNG',
+            type='Float64',
+            overwrite=True
+        )
 
     # reclassify to EAQI categories
     g_script.run_command(
@@ -133,12 +106,12 @@ def interpolate(layer, power, npoints, out_folder):
     )
 
     if not os.path.isdir(data_folder + 'cat_' + out_folder):
-        os.mkdir(config_folder + 'cat_' + out_folder)
+        os.mkdir(data_folder + 'cat_' + out_folder)
 
     g_script.run_command(
         'r.out.gdal',
         input='{}_eaqi'.format(temp_name),
-        output='{}cat_{}/{}.png'.format(data_folder, out_folder, temp_name),
+        output='{}cat_{}{}.png'.format(data_folder, out_folder, temp_name),
         format='PNG',
         type='Float64',
         overwrite=True
@@ -147,22 +120,45 @@ def interpolate(layer, power, npoints, out_folder):
 
 if __name__ == '__main__':
     init()
-
-    # To hard-code the mapset uncomment this command and comment switch_mapset()
-    #
-    #     g_script.run_command(
-    #         'g.mapset',
-    #         mapset=username
-    #     )
     switch_mapset()
 
-    # interpolate average values for each hour of the day using rst
-    for power in [0, 0.3, 1, 2, 4, 10, 30]:
-        interpolate('avg_11_hrs', power, 12, 'power')
+    default_tension = 100
+    t_values = [10, 20, 40, 100]
+    default_smoothing = 0.5
+    s_values = [0.05, 0.1, 0.5, 0.75, 1, 3, 10]
 
-    # for npoints in [0, 3, 8, 12, 20, 60]:
-    #     interpolate('avg_11_hrs', 2, npoints, 'npoints')
+    # interpolate with different parameters
+    for value in t_values:
+        if not os.path.isfile(data_folder + 'cat_tension/rst_{}_{}.png'.format(value, default_smoothing)):
+            interpolate('avg_11_hrs', value, default_smoothing, 'tension')
 
-    # interpolate 12:00 with idw and bsplines as well
-    # interpolate('avg_12_hrs', 'idw', 'avg_pm25', 'pm25')
-    # interpolate('avg_12_hrs', 'bspline', 'avg_pm25', 'pm25')
+    for value in s_values:
+        if not os.path.isfile(data_folder + 'cat_smoothing/rst_{}_{}.png'.format(default_tension, value)):
+            interpolate('avg_11_hrs', default_tension, value, 'smoothing')
+
+    # compare difference after categorization
+    g_script.run_command(
+        'r.mapcalc',
+        expression='rst_tension_diff = abs( rst_{1}_{0}_eaqi - rst_{2}_{0}_eaqi )'
+            .format(default_smoothing, t_values[0], t_values[-1]),
+        overwrite=True
+    )
+
+    g_script.run_command(
+        'r.report',
+        map='rst_tension_diff',
+        units='p'
+    )
+
+    g_script.run_command(
+        'r.mapcalc',
+        expression='rst_smoothing_diff = abs( rst_{0}_{1}_eaqi - rst_{0}_{2}_eaqi )'
+            .format(default_tension, s_values[0], s_values[-1]),
+        overwrite=True
+    )
+
+    g_script.run_command(
+        'r.report',
+        map='rst_smoothing_diff',
+        units='p'
+    )

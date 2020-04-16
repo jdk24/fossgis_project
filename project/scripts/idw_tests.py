@@ -68,7 +68,7 @@ def interpolate(layer, power, npoints, out_folder):
     :param npoints: str - value for the npoints parameter
     :param out_folder: str - sub folder in data to save the output to
     """
-    temp_name = '{}_{}_{}'.format(layer, npoints, power)
+    temp_name = 'idw_{}_{}'.format(npoints, power)
     out_folder += '/'
     # idw interpolation
     g_script.run_command(
@@ -82,17 +82,18 @@ def interpolate(layer, power, npoints, out_folder):
         quiet=True if run_quiet else False
     )
 
-    if not os.path.isdir(data_folder + out_folder):
-        os.mkdir(data_folder + out_folder)
+    if keep_intermediates:
+        if not os.path.isdir(data_folder + out_folder):
+            os.mkdir(data_folder + out_folder)
 
-    g_script.run_command(
-        'r.out.gdal',
-        input=temp_name,
-        output='{}{}/{}.png'.format(data_folder, out_folder, temp_name),
-        format='PNG',
-        type='Float64',
-        overwrite=True
-    )
+        g_script.run_command(
+            'r.out.gdal',
+            input=temp_name,
+            output='{}{}/{}.png'.format(data_folder, out_folder, temp_name),
+            format='PNG',
+            type='Float64',
+            overwrite=True
+        )
 
     # reclassify to EAQI categories
     g_script.run_command(
@@ -119,21 +120,45 @@ def interpolate(layer, power, npoints, out_folder):
 
 if __name__ == '__main__':
     init()
-
-    # To hard-code the mapset uncomment this command and comment switch_mapset()
-    #
-    #     g_script.run_command(
-    #         'g.mapset',
-    #         mapset=username
-    #     )
     switch_mapset()
 
-    # test different powers
-    for power in [0, 0.3, 1, 2, 4, 10, 30]:
-        interpolate('avg_11_hrs', power, 12, 'power')
+    default_power = 2
+    power_values = [0.3, 1, 2, 4, 10, 30]
+    default_npoints = 12
+    npoint_values = [0, 3, 8, 12, 20]
 
-    # test different npoints
-    for npoints in [0, 3, 8, 12, 20, 60]:
-        interpolate('avg_11_hrs', 2, npoints, 'npoints')
+    # interpolate with different parameters
+    for value in power_values:
+        if not os.path.isfile(data_folder + 'cat_power/idw_{}_{}.png'.format(default_npoints, value)):
+            interpolate('avg_11_hrs', value, default_npoints, 'power')
 
+    for value in npoint_values:
+        if not os.path.isfile(data_folder + 'cat_npoints/idw_{}_{}.png'.format(value, default_power)):
+            interpolate('avg_11_hrs', default_power, value, 'npoints')
 
+    # compare difference after categorization
+    g_script.run_command(
+        'r.mapcalc',
+        expression='idw_power_diff = abs( idw_{0}_{1}_eaqi - idw_{0}_{2}_eaqi )'
+            .format(default_npoints, power_values[0], power_values[-1]),
+        overwrite=True
+    )
+
+    g_script.run_command(
+        'r.report',
+        map='idw_power_diff',
+        units='p'
+    )
+
+    g_script.run_command(
+        'r.mapcalc',
+        expression='idw_npoints_diff = abs( idw_{1}_{0}_eaqi - idw_{2}_{0}_eaqi )'
+            .format(default_power, npoint_values[0], npoint_values[-1]),
+        overwrite=True
+    )
+
+    g_script.run_command(
+        'r.report',
+        map='idw_npoints_diff',
+        units='p'
+    )

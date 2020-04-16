@@ -17,7 +17,6 @@ def init():
 
 
 def switch_mapset():
-
     global user
     # set user from current mapset
     user = g_script.read_command(
@@ -61,16 +60,15 @@ def switch_mapset():
 
 def interpolate(layer, step, lambda_i, out_folder):
     """
-    Interpolates an existing vector point layer using either inverse distance weighting,
-    bi-linear splines or regularized splines with tension. The column name of the values that should be interpolated
-    needs to be passed as well as the category config for the pollutant that is interpolated e.g. 'pm25'.
-    The config files can be found in the data/config folder.
+    Interpolates an existing vector point layer using bi-linear splines.
+    The step and lambda_i values can be adjusted. The step refers to both the north-south and the east-west step,
+    creating square sub regions.
     :param layer: str - existing vector point layer with values to interpolate
-    :param value1: str - value to test interpolation methods with
-    :param column_name: str - name of the value column in the input layer
-    :param pollutant_config: str - name of the config in data/config folder to use for reclassification
+    :param step: str - value for the ew_step and ns_step parameters
+    :param lambda_i: str - value for the lambda_i paramter
+    :param out_folder: str - name of the output folder
     """
-    temp_name = '{}_{}_{}'.format(layer, step, lambda_i)
+    temp_name = 'bspline_{}_{}'.format(step, lambda_i)
     out_folder += '/'
 
     g_script.run_command(
@@ -82,38 +80,23 @@ def interpolate(layer, step, lambda_i, out_folder):
         ew_step=step,
         solver='cholesky',
         method='bilinear',
-        lambda_i= lambda_i
+        lambda_i=lambda_i,
         overwrite=True,
         quiet=True if run_quiet else False
     )
 
-    if not os.path.isdir(data_folder + out_folder):
-        os.mkdir(data_folder + out_folder)
+    if keep_intermediates:
+        if not os.path.isdir(data_folder + out_folder):
+            os.mkdir(data_folder + out_folder)
 
-    g_script.run_command(
-        'r.out.gdal',
-        input=temp_name,
-        output='{}{}/{}.png'.format(data_folder, out_folder, temp_name),
-        format='PNG',
-        type='Float64',
-        overwrite=True
-    )
-    # bspline interpolation
-    # elif i_method == 'bspline':
-
-    #
-    # # rst interpolation
-    # elif i_method == 'rst':
-    #     g_script.run_command(
-    #         'v.surf.rst',
-    #         input='{}@PERMANENT'.format(layer),
-    #         zcolumn=column_name,
-    #         elevation=temp_name,
-    #         segmax=10,
-    #         npmin=50,
-    #         overwrite=True,
-    #         quiet=True if run_quiet else False
-    #     )
+        g_script.run_command(
+            'r.out.gdal',
+            input=temp_name,
+            output='{}{}{}.png'.format(data_folder, out_folder, temp_name),
+            format='PNG',
+            type='Float64',
+            overwrite=True
+        )
 
     # reclassify to EAQI categories
     g_script.run_command(
@@ -131,7 +114,7 @@ def interpolate(layer, step, lambda_i, out_folder):
     g_script.run_command(
         'r.out.gdal',
         input='{}_eaqi'.format(temp_name),
-        output='{}cat_{}/{}.png'.format(data_folder, out_folder, temp_name),
+        output='{}cat_{}{}.png'.format(data_folder, out_folder, temp_name),
         format='PNG',
         type='Float64',
         overwrite=True
@@ -140,22 +123,46 @@ def interpolate(layer, step, lambda_i, out_folder):
 
 if __name__ == '__main__':
     init()
-
-    # To hard-code the mapset uncomment this command and comment switch_mapset()
-    #
-    #     g_script.run_command(
-    #         'g.mapset',
-    #         mapset=username
-    #     )
     switch_mapset()
 
-    # interpolate average values for each hour of the day using rst
-    for lambda_i in [0, 0.3, 1, 2, 4, 10, 30]:
-        interpolate('avg_11_hrs', lambda_i, 12, 'power')
+    # set default values
+    default_lambda = 0.01
+    l_values = [0.001, 0.006, 0.01, 0.06, 0.1]
+    default_step = 50  # adjust to your point density
+    step_values = [50, 75, 100, 150, 200]  # values below 50 result in too many areas with no data
 
-    # for step in [0, 3, 8, 12, 20, 60]:
-    #     interpolate('avg_11_hrs', 2, npoints, 'npoints')
+    # interpolate with different parameters
+    for value in l_values:
+        if not os.path.isfile(data_folder + 'cat_lambda_i/bspline_{}_{}.png'.format(default_step, value)):
+            interpolate('avg_11_hrs', default_step, value, 'lambda_i')
 
-    # interpolate 12:00 with idw and bsplines as well
-    # interpolate('avg_12_hrs', 'idw', 'avg_pm25', 'pm25')
-    # interpolate('avg_12_hrs', 'bspline', 'avg_pm25', 'pm25')
+    for value in step_values:
+        if not os.path.isfile(data_folder + 'cat_step/bspline_{}_{}.png'.format(value, default_lambda)):
+            interpolate('avg_11_hrs', value, default_lambda, 'step')
+
+    # compare difference after categorization
+    g_script.run_command(
+        'r.mapcalc',
+        expression='bspline_lambda_diff = abs( bspline_{0}_{1}_eaqi - bspline_{0}_{2}_eaqi )'
+            .format(default_step, l_values[0], l_values[-1]),
+        overwrite=True
+    )
+
+    g_script.run_command(
+        'r.report',
+        map='bspline_lambda_diff',
+        units='p'
+    )
+
+    g_script.run_command(
+        'r.mapcalc',
+        expression='bspline_step_diff = abs( bspline_{1}_{0}_eaqi - bspline_{2}_{0}_eaqi )'
+            .format(default_lambda, step_values[0], step_values[-1]),
+        overwrite=True
+    )
+
+    g_script.run_command(
+        'r.report',
+        map='bspline_step_diff',
+        units='p'
+    )
