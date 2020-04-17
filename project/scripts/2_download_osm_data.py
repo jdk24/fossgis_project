@@ -1,7 +1,8 @@
 # coding=utf-8
-# Use a Python 3 env with following installed
 # tested on Python 3.7
-#
+# Use a Python 3 env with following installed packages:
+# - requests
+# - osmtogeojson
 from __future__ import print_function
 
 import requests
@@ -68,7 +69,7 @@ if __name__ == '__main__':
     with open('../data/stuttgart.geojson', 'w') as fp:
         fp.write(json.dumps(temp).replace('fixme', 'FIXME'))
 
-    out('File stuttgart_districts.geojson created in data folder.')
+    out('File stuttgart.geojson created in data folder.')
 
     out('Downloading stuttgart districts from overpass API. Please wait ...')
     # set up parameters

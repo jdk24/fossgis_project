@@ -58,7 +58,7 @@ def switch_mapset():
     print('Switched to {}'.format(user))
 
 
-def interpolate(layer, i_method, column_name, pollutant_config):
+def analyse(layer, i_method, column_name, pollutant_config):
     """
     Interpolates an existing vector point layer using either inverse distance weighting,
     bi-linear splines or regularized splines with tension. The column name of the values that should be interpolated
@@ -190,8 +190,4 @@ if __name__ == '__main__':
 
     # interpolate average values for each hour of the day using rst
     for name in ['avg_{0:0=2d}_hrs'.format(x) for x in range(0, 24)]:
-        interpolate(name, 'rst', 'avg_pm25', 'pm25')
-
-    # interpolate 12:00 with idw and bsplines as well
-    interpolate('avg_12_hrs', 'idw', 'avg_pm25', 'pm25')
-    interpolate('avg_12_hrs', 'bspline', 'avg_pm25', 'pm25')
+        analyse(name, 'rst', 'avg_pm25', 'pm25')
