@@ -9,7 +9,10 @@ The project is structured into the following folders and contents:
 After installing all dependencies listed in [prerequisites](#prerequesites) the different workflows
  should be executable.
 
-Once 
+Once _Getting started_ commands are finished you should be able to run every workflow independently.
+
+In a future endeavor the interpolation workflow could be coupled with the database and the web application connected
+directly to the database views providing near real-time data.
  
  ## Prerequesites
 - [NodeJS](https://nodejs.org/en/) (used: 12.11.1, or use [NVM](https://github.com/nvm-sh/nvm))
@@ -53,9 +56,30 @@ Once
     ```
 
 ## PostgreSQL database workflow
+Dependencies: PostgreSQL, GeoServer/GRASS GIS?
 
+1. Change to scripts folder (if you are not already there)
+    ```bash
+    project/scripts
+    ```
+1. Run database setup script
+    ```bash
+    psql 0_db_setup.sql
+    ```
+1. Start cron jobs to download lubw & luftdaten data
+    ```bash
+    # Julian more info pls :D
+    sh 1_1_dl_lubw.sh
+    sh 1_2_dl_luftdaten.sh
+    ```
+1. (Fill database with values from january if needed
+    ```bash
+    psql luftdaten_backup.sql
+    ```
+    )
 
 ## Interpolation workflow
+Dependencies: Python 3, GRASS GIS
 
 1. Activate Python 3 environment
     ```bash
@@ -67,6 +91,7 @@ Once
     ```
 1. Run OSM download script
     ```bash
+    # if you are having trouble with this step try the manual download at the bottom of this README
     python download_osm_data.py
     ```
 1. Deactivate the environment
@@ -93,14 +118,44 @@ Afterwards:
     ```bash
     project/scripts
     ```
-1. Change to scripts folder (if you are not already there)
+1. Run interpolation setup script
     ```bash
-    python 
+    python 3_interpolation_setup.py
+    ```
+1. Run the algorithm tests to create some categorized raster layers and `.png` files in `data/img` for different configurations.
+    This step is optional. Adjust `keep_intermadiates` value to keep intermediate raster.
+    ```bash
+    python 4_1_idw_tests.py
+    python 4_2_bspline_tests.py
+    python 4_3_rst_tests.py
+    ```
+1. Run interpolation process script to generate hourly layers and `.geojson` files from the ones in `data/pm25` (loaded in interpolation setup)
+    ```bash
+    python 5_interpolation_process.py
     ```
 
-## Routing application workflow
+The interpolation process script can easily switch between the 3 algorithms by passing a different `i_method` value to
+    the `analyse()` function.
 
-### Overpass Queries
+## Routing application workflow
+Dependencies: NodeJS
+
+1. change to webapp folder
+    ```bash
+    project/webapp
+    ```
+1. install webapp dependencies
+    ```bash
+    npm install
+    ```
+1. serve webapp locally
+    ```bash
+    npm run serve
+    ```
+1. open the application in you favorite browser on https://localhost:8080 (check output of previous command)
+
+
+## Overpass Queries
 
 If you are having trouble to downloading the osm data run the following query on overpass-turbo.eu
 and export it as geojson:
