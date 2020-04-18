@@ -4,6 +4,8 @@ lubw.csv
 lubw.geojson
 luftdaten.csv
 luftdaten.geojson
+stuttgart.geojson
+stuttgart_districts.geojson
 *_p10.geojson
 *_p10_4326.geojson
 
@@ -19,4 +21,5 @@ report/schaubild.xlsx
 report/~$port_butzer_kaeflein.docx
 report/~$schaubild.xlsx
 report/~WRL1429.tmp
+env/
 *.tmp
