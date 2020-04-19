@@ -59,57 +59,25 @@ CREATE FUNCTION daten.luftdaten_parse() RETURNS void
 
 DECLARE
 
-
-
   json_data jsonb;
-
-
-
   i jsonb;
-
   sid integer;
-
-
-
   time_stamp timestamp;
-
   station_id integer;
-
   altitude double precision;
-
   country varchar;
-
   indoor boolean;
-
   lon double precision;
-
   lat double precision;
-
   geom public.geometry;
-
- 
-
-  p10 double precision;
-
+    p10 double precision;
   p25 double precision;
-
- 
-
   curr_time timestamp := date_trunc('second',now());
-
- 
-
   stuttgart_clip public.geometry;
 
 BEGIN
 
-
-
-      
-
 -----------------GET RAW JSON VALUES FROM INPUT TBL
-
-
 
   SELECT *
 
@@ -117,11 +85,7 @@ BEGIN
 
   INTO json_data;
 
- 
-
 -----------------GET BOUNDARY POLYGON 
-
- 
 
  SELECT * 
 
@@ -129,13 +93,7 @@ BEGIN
 
  INTO stuttgart_clip;
 
-
-
-
-
 -----------------START PARSING IN FOR LOOP WITH i AS EACH JSON ELEMENT
-
-
 
   FOR i in
 
@@ -143,11 +101,7 @@ BEGIN
 
   LOOP
 
-
-
 -----------------WITHIN THIS SELECTION, ONLY GET SDS011 (sensorid=14) DATA
-
-
 
   FOR sid IN
 
@@ -159,7 +113,6 @@ BEGIN
 
         WHEN sid=14 THEN 
 
-       
 
 		    time_stamp := (i->>'timestamp')::timestamp;
 
@@ -180,14 +133,10 @@ BEGIN
 		    geom := st_setsrid(st_makepoint(lon,lat),4326);
 
 		   	   
-
 			p10 := (i->'sensordatavalues'->0->>'value')::double precision;
 
 			p25 := (i->'sensordatavalues'->1->>'value')::double precision;
-
- 			
-
-            
+          
 
 -----------------INSERT DATA INTO PERMANENT TBL 
 
@@ -203,7 +152,7 @@ BEGIN
 
          p25,
 
-		 geom,
+	 geom,
 
          lat
 
@@ -213,17 +162,12 @@ BEGIN
 
         ELSE CONTINUE;
 
-        
-
       END CASE;
 
      END LOOP;
 
     
-
 END LOOP;
-
-
 
 -----------------CREATE LOGTABLE ENTRY
 
@@ -231,11 +175,7 @@ END LOOP;
 
 INSERT INTO daten.logtable (logentry) values (('{"event":"Inserted Luftdaten data","time":"'||curr_time||'","source":"luftdaten"}')::json);
 
-
-
---truncate table daten.luftdaten_raw;
-
-
+truncate table daten.luftdaten_raw;
 
 END;
 
@@ -653,6 +593,1465 @@ ALTER TABLE public.stuttgart_stadtkreis OWNER TO postgres;
 -- TOC entry 4178 (class 2604 OID 78459)
 -- Name: global_tmp idpk; Type: DEFAULT; Schema: daten; Owner: postgres
 --
+
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.4
+-- Dumped by pg_dump version 11.5
+
+-- Started on 2020-04-19 13:59:59
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+ALTER TABLE IF EXISTS ONLY daten.dt_lubw DROP CONSTRAINT IF EXISTS dt_lubw_fk;
+DROP INDEX IF EXISTS daten.luftdaten_uq_time_station;
+DROP INDEX IF EXISTS daten.ludftdaten_idpk_idx;
+ALTER TABLE IF EXISTS ONLY daten.lut_luftdaten_stations DROP CONSTRAINT IF EXISTS lut_luftdaten_stations_station_id_key;
+ALTER TABLE IF EXISTS ONLY daten.lut_luftdaten_stations DROP CONSTRAINT IF EXISTS lut_luftdaten_stations_pkey;
+ALTER TABLE IF EXISTS ONLY daten.lut_lubw_stations DROP CONSTRAINT IF EXISTS lut_lubw_stations_pkey;
+ALTER TABLE IF EXISTS ONLY daten.dt_luftdaten DROP CONSTRAINT IF EXISTS luftdaten_pkey;
+ALTER TABLE IF EXISTS ONLY daten.dt_lubw DROP CONSTRAINT IF EXISTS dt_lubw_uq_station_ts;
+ALTER TABLE IF EXISTS ONLY daten.dt_lubw DROP CONSTRAINT IF EXISTS dt_lubw_pkey;
+ALTER TABLE IF EXISTS daten.lut_luftdaten_stations ALTER COLUMN idpk DROP DEFAULT;
+ALTER TABLE IF EXISTS daten.lut_lubw_stations ALTER COLUMN idpk DROP DEFAULT;
+ALTER TABLE IF EXISTS daten.logtable ALTER COLUMN pk_log DROP DEFAULT;
+ALTER TABLE IF EXISTS daten.dt_luftdaten ALTER COLUMN idpk DROP DEFAULT;
+ALTER TABLE IF EXISTS daten.dt_lubw ALTER COLUMN idpk DROP DEFAULT;
+DROP SEQUENCE IF EXISTS daten.table1_idpk_seq;
+DROP SEQUENCE IF EXISTS daten.lut_luftdaten_stations_idpk_seq;
+DROP SEQUENCE IF EXISTS daten.lut_lubw_stations_idpk_seq;
+DROP VIEW IF EXISTS daten.luftdaten_pm25_filtered;
+DROP VIEW IF EXISTS daten.luftdaten_pm10_latest;
+DROP VIEW IF EXISTS daten.luftdaten_pm10_filtered;
+DROP SEQUENCE IF EXISTS daten.luftdaten_idpk_seq;
+DROP VIEW IF EXISTS daten.lubw_pm25_latest;
+DROP VIEW IF EXISTS daten.lubw_pm10_latest;
+DROP SEQUENCE IF EXISTS daten.logtable_pk_log_seq;
+DROP TABLE IF EXISTS daten.logtable;
+DROP TABLE IF EXISTS daten.dt_lubw;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_23_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_22_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_21_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_20_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_19_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_18_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_17_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_16_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_15_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_14_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_13_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_12_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_11_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_10_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_0_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_09_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_08_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_07_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_06_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_05_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_04_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_03_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_02_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_01_hrs;
+DROP MATERIALIZED VIEW IF EXISTS daten.avg_00_hrs;
+DROP TABLE IF EXISTS daten.lut_luftdaten_stations;
+DROP TABLE IF EXISTS daten.lut_lubw_stations;
+DROP TABLE IF EXISTS daten.dt_luftdaten;
+DROP FUNCTION IF EXISTS daten.luftdaten_parse();
+DROP FUNCTION IF EXISTS daten.lubw_parse();
+DROP FUNCTION IF EXISTS daten.get_geojson(tbl text);
+DROP SCHEMA IF EXISTS daten;
+--
+-- TOC entry 7 (class 2615 OID 78422)
+-- Name: daten; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA daten;
+
+
+ALTER SCHEMA daten OWNER TO postgres;
+
+--
+-- TOC entry 1493 (class 1255 OID 167646)
+-- Name: get_geojson(text); Type: FUNCTION; Schema: daten; Owner: postgres
+--
+
+CREATE FUNCTION daten.get_geojson(tbl text) RETURNS jsonb
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+tbl text;
+BEGIN
+SELECT jsonb_build_object(
+    'type',     'FeatureCollection',
+    'features', jsonb_agg(features.feature)
+)
+FROM (
+  SELECT jsonb_build_object(
+    'type',       'Feature',
+    'id',         id_pk,
+    'geometry',   ST_AsGeoJSON(geom)::jsonb,
+    'properties', to_jsonb(row) - 'gid' - 'geom'
+  ) AS feature
+  FROM (SELECT * FROM daten.avg_00_hrs) row) features;
+END;
+$$;
+
+
+ALTER FUNCTION daten.get_geojson(tbl text) OWNER TO postgres;
+
+--
+-- TOC entry 1491 (class 1255 OID 79832)
+-- Name: lubw_parse(); Type: FUNCTION; Schema: daten; Owner: postgres
+--
+
+CREATE FUNCTION daten.lubw_parse() RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+DECLARE 
+  curr_time timestamp := date_trunc('second',now());
+BEGIN
+
+----------WE ONLY NEED TO SELECT THE RELEVANT DATA FROM PUBLIC INPUT
+----LUCKILY, ALL STATIONS BEGIN WITH THE NAME OF THE CITY
+--SELECT ALL STATIONS WITHIN STUTTGART THAT MEASURE PM
+
+INSERT INTO daten.lut_lubw_stations(idpk,station_name,geom) 
+  SELECT 
+      id,
+      name,
+      wkb_geometry
+  FROM public.input_raw_lubw
+    WHERE name like ('%Stuttgart%') 
+    AND pm10_today_latest is not null 
+    AND pm25_today_latest is not null 
+ON CONFLICT DO NOTHING;
+
+
+----------TO SAVE SPACE, WE PUT THE VERY LONG GEOM COLUMN IN THE LUT ABOVE
+----INSERT DATA INTO DATA TABLE WITH STATION AS FOREIGN KEY 
+
+INSERT INTO daten.dt_lubw(fk_station_id,time_stamp,p10,p25) 
+  SELECT 
+      id,
+      publication_ts::timestamp,
+	  nullif(pm10_today_latest::text,'')::DOUBLE PRECISION,
+  	  nullif(pm25_today_latest::text,'')::DOUBLE PRECISION
+  FROM public.input_raw_lubw
+    WHERE name like ('%Stuttgart%') 
+    AND pm10_today_latest is not null 
+    AND pm25_today_latest is not null 
+ON CONFLICT DO NOTHING;
+
+INSERT INTO daten.logtable (logentry) values (('{"event":"Inserted LUBW data","time":"'||curr_time||'","source":"lubw"}')::json);
+
+--TRUNCATE TABLE input_raw_lubw
+
+END;
+$$;
+
+
+ALTER FUNCTION daten.lubw_parse() OWNER TO postgres;
+
+--
+-- TOC entry 1490 (class 1255 OID 78441)
+-- Name: luftdaten_parse(); Type: FUNCTION; Schema: daten; Owner: postgres
+--
+
+CREATE TABLE daten.dt_luftdaten (
+    idpk integer NOT NULL,
+    station_id integer NOT NULL,
+    time_stamp timestamp without time zone NOT NULL,
+    p10 double precision,
+    p25 double precision
+);
+
+
+ALTER TABLE daten.dt_luftdaten OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 79811)
+-- Name: lut_lubw_stations; Type: TABLE; Schema: daten; Owner: postgres
+--
+
+CREATE TABLE daten.lut_lubw_stations (
+    idpk integer NOT NULL,
+    station_name character varying(50),
+    geom public.geometry NOT NULL
+);
+ALTER TABLE ONLY daten.lut_lubw_stations ALTER COLUMN idpk SET STATISTICS 0;
+ALTER TABLE ONLY daten.lut_lubw_stations ALTER COLUMN station_name SET STATISTICS 0;
+ALTER TABLE ONLY daten.lut_lubw_stations ALTER COLUMN geom SET STATISTICS 0;
+
+
+ALTER TABLE daten.lut_lubw_stations OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 79788)
+-- Name: lut_luftdaten_stations; Type: TABLE; Schema: daten; Owner: postgres
+--
+
+CREATE TABLE daten.lut_luftdaten_stations (
+    idpk integer NOT NULL,
+    station_id integer NOT NULL,
+    geom public.geometry NOT NULL
+);
+ALTER TABLE ONLY daten.lut_luftdaten_stations ALTER COLUMN idpk SET STATISTICS 0;
+ALTER TABLE ONLY daten.lut_luftdaten_stations ALTER COLUMN station_id SET STATISTICS 0;
+ALTER TABLE ONLY daten.lut_luftdaten_stations ALTER COLUMN geom SET STATISTICS 0;
+
+
+ALTER TABLE daten.lut_luftdaten_stations OWNER TO postgres;
+
+--
+-- TOC entry 237 (class 1259 OID 167420)
+-- Name: avg_00_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_00_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (0)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (0)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_00_hrs OWNER TO postgres;
+
+--
+-- TOC entry 238 (class 1259 OID 167429)
+-- Name: avg_01_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_01_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (1)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (1)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_01_hrs OWNER TO postgres;
+
+--
+-- TOC entry 239 (class 1259 OID 167437)
+-- Name: avg_02_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_02_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (2)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (2)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_02_hrs OWNER TO postgres;
+
+--
+-- TOC entry 240 (class 1259 OID 167445)
+-- Name: avg_03_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_03_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (3)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (3)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_03_hrs OWNER TO postgres;
+
+--
+-- TOC entry 241 (class 1259 OID 167453)
+-- Name: avg_04_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_04_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (4)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (4)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_04_hrs OWNER TO postgres;
+
+--
+-- TOC entry 242 (class 1259 OID 167461)
+-- Name: avg_05_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_05_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (5)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (5)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_05_hrs OWNER TO postgres;
+
+--
+-- TOC entry 243 (class 1259 OID 167469)
+-- Name: avg_06_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_06_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (6)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (6)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_06_hrs OWNER TO postgres;
+
+--
+-- TOC entry 244 (class 1259 OID 167477)
+-- Name: avg_07_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_07_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (7)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (7)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_07_hrs OWNER TO postgres;
+
+--
+-- TOC entry 245 (class 1259 OID 167492)
+-- Name: avg_08_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_08_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (8)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (8)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_08_hrs OWNER TO postgres;
+
+--
+-- TOC entry 246 (class 1259 OID 167500)
+-- Name: avg_09_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_09_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (9)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (9)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_09_hrs OWNER TO postgres;
+
+--
+-- TOC entry 236 (class 1259 OID 167407)
+-- Name: avg_0_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_0_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (0)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (0)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_0_hrs OWNER TO postgres;
+
+--
+-- TOC entry 247 (class 1259 OID 167508)
+-- Name: avg_10_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_10_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (10)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (10)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_10_hrs OWNER TO postgres;
+
+--
+-- TOC entry 248 (class 1259 OID 167516)
+-- Name: avg_11_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_11_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (11)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (11)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_11_hrs OWNER TO postgres;
+
+--
+-- TOC entry 249 (class 1259 OID 167524)
+-- Name: avg_12_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_12_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (12)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (12)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_12_hrs OWNER TO postgres;
+
+--
+-- TOC entry 250 (class 1259 OID 167532)
+-- Name: avg_13_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_13_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (13)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (13)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_13_hrs OWNER TO postgres;
+
+--
+-- TOC entry 251 (class 1259 OID 167540)
+-- Name: avg_14_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_14_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (14)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (14)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_14_hrs OWNER TO postgres;
+
+--
+-- TOC entry 252 (class 1259 OID 167548)
+-- Name: avg_15_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_15_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (15)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (15)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_15_hrs OWNER TO postgres;
+
+--
+-- TOC entry 253 (class 1259 OID 167556)
+-- Name: avg_16_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_16_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (16)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (16)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_16_hrs OWNER TO postgres;
+
+--
+-- TOC entry 254 (class 1259 OID 167564)
+-- Name: avg_17_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_17_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (17)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (17)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_17_hrs OWNER TO postgres;
+
+--
+-- TOC entry 255 (class 1259 OID 167572)
+-- Name: avg_18_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_18_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (18)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (18)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_18_hrs OWNER TO postgres;
+
+--
+-- TOC entry 256 (class 1259 OID 167581)
+-- Name: avg_19_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_19_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (19)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (19)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_19_hrs OWNER TO postgres;
+
+--
+-- TOC entry 257 (class 1259 OID 167603)
+-- Name: avg_20_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_20_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (20)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (20)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_20_hrs OWNER TO postgres;
+
+--
+-- TOC entry 258 (class 1259 OID 167611)
+-- Name: avg_21_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_21_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (21)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (21)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_21_hrs OWNER TO postgres;
+
+--
+-- TOC entry 259 (class 1259 OID 167619)
+-- Name: avg_22_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_22_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (22)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (22)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_22_hrs OWNER TO postgres;
+
+--
+-- TOC entry 260 (class 1259 OID 167627)
+-- Name: avg_23_hrs; Type: MATERIALIZED VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE MATERIALIZED VIEW daten.avg_23_hrs AS
+ WITH at_epoch AS (
+         SELECT ld.station_id,
+            ld.p25,
+            lds.geom
+           FROM (daten.dt_luftdaten ld
+             JOIN daten.lut_luftdaten_stations lds ON ((ld.station_id = lds.station_id)))
+          WHERE ((date_part('hour'::text, ld.time_stamp) = (23)::double precision) AND (ld.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+                   FROM (daten.dt_luftdaten dt_1
+                     JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id))))))
+        UNION ALL
+         SELECT lu.station_id,
+            lu.p25,
+            lus.geom
+           FROM (daten.dt_luftdaten lu
+             JOIN daten.lut_lubw_stations lus ON ((lu.station_id = lus.idpk)))
+          WHERE (date_part('hour'::text, lu.time_stamp) = (23)::double precision)
+        )
+ SELECT (row_number() OVER ())::integer AS id_pk,
+    at_epoch.station_id,
+    avg(at_epoch.p25) AS avg_pm25,
+    at_epoch.geom
+   FROM at_epoch
+  GROUP BY at_epoch.station_id, at_epoch.geom
+  WITH NO DATA;
+
+
+ALTER TABLE daten.avg_23_hrs OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 79822)
+-- Name: dt_lubw; Type: TABLE; Schema: daten; Owner: postgres
+--
+
+CREATE TABLE daten.dt_lubw (
+    idpk integer NOT NULL,
+    fk_station_id integer NOT NULL,
+    time_stamp timestamp(6) without time zone NOT NULL,
+    p10 double precision,
+    p25 double precision,
+    ts timestamp(0) without time zone
+);
+ALTER TABLE ONLY daten.dt_lubw ALTER COLUMN idpk SET STATISTICS 0;
+ALTER TABLE ONLY daten.dt_lubw ALTER COLUMN fk_station_id SET STATISTICS 0;
+ALTER TABLE ONLY daten.dt_lubw ALTER COLUMN time_stamp SET STATISTICS 0;
+ALTER TABLE ONLY daten.dt_lubw ALTER COLUMN p10 SET STATISTICS 0;
+ALTER TABLE ONLY daten.dt_lubw ALTER COLUMN p25 SET STATISTICS 0;
+
+
+ALTER TABLE daten.dt_lubw OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 78450)
+-- Name: logtable; Type: TABLE; Schema: daten; Owner: postgres
+--
+
+CREATE TABLE daten.logtable (
+    pk_log integer NOT NULL,
+    logentry json NOT NULL
+);
+
+
+ALTER TABLE daten.logtable OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 78448)
+-- Name: logtable_pk_log_seq; Type: SEQUENCE; Schema: daten; Owner: postgres
+--
+
+CREATE SEQUENCE daten.logtable_pk_log_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE daten.logtable_pk_log_seq OWNER TO postgres;
+
+--
+-- TOC entry 4500 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: logtable_pk_log_seq; Type: SEQUENCE OWNED BY; Schema: daten; Owner: postgres
+--
+
+ALTER SEQUENCE daten.logtable_pk_log_seq OWNED BY daten.logtable.pk_log;
+
+
+--
+-- TOC entry 227 (class 1259 OID 91397)
+-- Name: lubw_pm10_latest; Type: VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE VIEW daten.lubw_pm10_latest AS
+ SELECT DISTINCT ON (s.idpk) s.station_name AS station_id,
+    dt.time_stamp,
+    dt.p10,
+    s.geom
+   FROM (daten.dt_lubw dt
+     JOIN daten.lut_lubw_stations s ON ((dt.fk_station_id = s.idpk)))
+  ORDER BY s.idpk, dt.time_stamp DESC;
+
+
+ALTER TABLE daten.lubw_pm10_latest OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 92851)
+-- Name: lubw_pm25_latest; Type: VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE VIEW daten.lubw_pm25_latest AS
+ SELECT DISTINCT ON (s.idpk) s.station_name AS station_id,
+    dt.time_stamp,
+    dt.p25,
+    dt.p10,
+    s.geom
+   FROM (daten.dt_lubw dt
+     JOIN daten.lut_lubw_stations s ON ((dt.fk_station_id = s.idpk)))
+  ORDER BY s.idpk, dt.time_stamp DESC;
+
+
+ALTER TABLE daten.lubw_pm25_latest OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 79598)
+-- Name: luftdaten_idpk_seq; Type: SEQUENCE; Schema: daten; Owner: postgres
+--
+
+CREATE SEQUENCE daten.luftdaten_idpk_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE daten.luftdaten_idpk_seq OWNER TO postgres;
+
+--
+-- TOC entry 4501 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: luftdaten_idpk_seq; Type: SEQUENCE OWNED BY; Schema: daten; Owner: postgres
+--
+
+ALTER SEQUENCE daten.luftdaten_idpk_seq OWNED BY daten.dt_luftdaten.idpk;
+
+
+--
+-- TOC entry 230 (class 1259 OID 125695)
+-- Name: luftdaten_pm10_filtered; Type: VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE VIEW daten.luftdaten_pm10_filtered AS
+ SELECT DISTINCT ON (s.station_id) s.station_id,
+    dt.time_stamp,
+    dt.p10,
+    s.geom
+   FROM (daten.dt_luftdaten dt
+     JOIN daten.lut_luftdaten_stations s ON ((dt.station_id = s.station_id)))
+  WHERE (dt.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+           FROM (daten.dt_luftdaten dt_1
+             JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id)))))
+  ORDER BY s.station_id, dt.time_stamp DESC;
+
+
+ALTER TABLE daten.luftdaten_pm10_filtered OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 91556)
+-- Name: luftdaten_pm10_latest; Type: VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE VIEW daten.luftdaten_pm10_latest AS
+ SELECT DISTINCT ON (s.station_id) s.station_id,
+    dt.time_stamp,
+    dt.p10,
+    s.geom
+   FROM (daten.dt_luftdaten dt
+     JOIN daten.lut_luftdaten_stations s ON ((dt.station_id = s.station_id)))
+  WHERE ((dt.time_stamp > (now() - '03:00:00'::interval)) AND (dt.p10 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p10) AS perc
+           FROM (daten.dt_luftdaten dt_1
+             JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id)))
+          WHERE (dt_1.time_stamp > (now() - '03:00:00'::interval)))))
+  ORDER BY s.station_id, dt.time_stamp DESC;
+
+
+ALTER TABLE daten.luftdaten_pm10_latest OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 91389)
+-- Name: luftdaten_pm25_filtered; Type: VIEW; Schema: daten; Owner: postgres
+--
+
+CREATE VIEW daten.luftdaten_pm25_filtered AS
+ SELECT DISTINCT ON (s.station_id) s.station_id,
+    dt.time_stamp,
+    dt.p25,
+    s.geom
+   FROM (daten.dt_luftdaten dt
+     JOIN daten.lut_luftdaten_stations s ON ((dt.station_id = s.station_id)))
+  WHERE (dt.p25 <= ( SELECT percentile_disc((0.99)::double precision) WITHIN GROUP (ORDER BY dt_1.p25) AS perc
+           FROM (daten.dt_luftdaten dt_1
+             JOIN daten.lut_luftdaten_stations s_1 ON ((dt_1.station_id = s_1.station_id)))))
+  ORDER BY s.station_id, dt.time_stamp DESC;
+
+
+ALTER TABLE daten.luftdaten_pm25_filtered OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 79809)
+-- Name: lut_lubw_stations_idpk_seq; Type: SEQUENCE; Schema: daten; Owner: postgres
+--
+
+CREATE SEQUENCE daten.lut_lubw_stations_idpk_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE daten.lut_lubw_stations_idpk_seq OWNER TO postgres;
+
+--
+-- TOC entry 4502 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: lut_lubw_stations_idpk_seq; Type: SEQUENCE OWNED BY; Schema: daten; Owner: postgres
+--
+
+ALTER SEQUENCE daten.lut_lubw_stations_idpk_seq OWNED BY daten.lut_lubw_stations.idpk;
+
+
+--
+-- TOC entry 220 (class 1259 OID 79786)
+-- Name: lut_luftdaten_stations_idpk_seq; Type: SEQUENCE; Schema: daten; Owner: postgres
+--
+
+CREATE SEQUENCE daten.lut_luftdaten_stations_idpk_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE daten.lut_luftdaten_stations_idpk_seq OWNER TO postgres;
+
+--
+-- TOC entry 4503 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: lut_luftdaten_stations_idpk_seq; Type: SEQUENCE OWNED BY; Schema: daten; Owner: postgres
+--
+
+ALTER SEQUENCE daten.lut_luftdaten_stations_idpk_seq OWNED BY daten.lut_luftdaten_stations.idpk;
+
+
+--
+-- TOC entry 224 (class 1259 OID 79820)
+-- Name: table1_idpk_seq; Type: SEQUENCE; Schema: daten; Owner: postgres
+--
+
+CREATE SEQUENCE daten.table1_idpk_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE daten.table1_idpk_seq OWNER TO postgres;
+
+--
+-- TOC entry 4504 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: table1_idpk_seq; Type: SEQUENCE OWNED BY; Schema: daten; Owner: postgres
+--
+
+ALTER SEQUENCE daten.table1_idpk_seq OWNED BY daten.dt_lubw.idpk;
+
+
+--
+-- TOC entry 4321 (class 2604 OID 79825)
+-- Name: dt_lubw idpk; Type: DEFAULT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.dt_lubw ALTER COLUMN idpk SET DEFAULT nextval('daten.table1_idpk_seq'::regclass);
+
+
+--
+-- TOC entry 4318 (class 2604 OID 79603)
+-- Name: dt_luftdaten idpk; Type: DEFAULT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.dt_luftdaten ALTER COLUMN idpk SET DEFAULT nextval('daten.luftdaten_idpk_seq'::regclass);
+
+
+--
+-- TOC entry 4317 (class 2604 OID 78453)
+-- Name: logtable pk_log; Type: DEFAULT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.logtable ALTER COLUMN pk_log SET DEFAULT nextval('daten.logtable_pk_log_seq'::regclass);
+
+
+--
+-- TOC entry 4320 (class 2604 OID 79814)
+-- Name: lut_lubw_stations idpk; Type: DEFAULT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.lut_lubw_stations ALTER COLUMN idpk SET DEFAULT nextval('daten.lut_lubw_stations_idpk_seq'::regclass);
+
+
+--
+-- TOC entry 4319 (class 2604 OID 79791)
+-- Name: lut_luftdaten_stations idpk; Type: DEFAULT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.lut_luftdaten_stations ALTER COLUMN idpk SET DEFAULT nextval('daten.lut_luftdaten_stations_idpk_seq'::regclass);
+
+
+--
+-- TOC entry 4333 (class 2606 OID 79827)
+-- Name: dt_lubw dt_lubw_pkey; Type: CONSTRAINT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.dt_lubw
+    ADD CONSTRAINT dt_lubw_pkey PRIMARY KEY (idpk);
+
+
+--
+-- TOC entry 4335 (class 2606 OID 79831)
+-- Name: dt_lubw dt_lubw_uq_station_ts; Type: CONSTRAINT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.dt_lubw
+    ADD CONSTRAINT dt_lubw_uq_station_ts UNIQUE (time_stamp, fk_station_id);
+
+
+--
+-- TOC entry 4324 (class 2606 OID 79608)
+-- Name: dt_luftdaten luftdaten_pkey; Type: CONSTRAINT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.dt_luftdaten
+    ADD CONSTRAINT luftdaten_pkey PRIMARY KEY (idpk);
+
+
+--
+-- TOC entry 4331 (class 2606 OID 79819)
+-- Name: lut_lubw_stations lut_lubw_stations_pkey; Type: CONSTRAINT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.lut_lubw_stations
+    ADD CONSTRAINT lut_lubw_stations_pkey PRIMARY KEY (idpk);
+
+
+--
+-- TOC entry 4327 (class 2606 OID 79796)
+-- Name: lut_luftdaten_stations lut_luftdaten_stations_pkey; Type: CONSTRAINT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.lut_luftdaten_stations
+    ADD CONSTRAINT lut_luftdaten_stations_pkey PRIMARY KEY (idpk);
+
+
+--
+-- TOC entry 4329 (class 2606 OID 79798)
+-- Name: lut_luftdaten_stations lut_luftdaten_stations_station_id_key; Type: CONSTRAINT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.lut_luftdaten_stations
+    ADD CONSTRAINT lut_luftdaten_stations_station_id_key UNIQUE (station_id);
+
+
+--
+-- TOC entry 4322 (class 1259 OID 79610)
+-- Name: ludftdaten_idpk_idx; Type: INDEX; Schema: daten; Owner: postgres
+--
+
+CREATE INDEX ludftdaten_idpk_idx ON daten.dt_luftdaten USING btree (idpk, time_stamp);
+
+
+--
+-- TOC entry 4325 (class 1259 OID 79611)
+-- Name: luftdaten_uq_time_station; Type: INDEX; Schema: daten; Owner: postgres
+--
+
+CREATE UNIQUE INDEX luftdaten_uq_time_station ON daten.dt_luftdaten USING btree (time_stamp, station_id);
+
+
+--
+-- TOC entry 4336 (class 2606 OID 167657)
+-- Name: dt_lubw dt_lubw_fk; Type: FK CONSTRAINT; Schema: daten; Owner: postgres
+--
+
+ALTER TABLE ONLY daten.dt_lubw
+    ADD CONSTRAINT dt_lubw_fk FOREIGN KEY (fk_station_id) REFERENCES daten.lut_lubw_stations(idpk);
+
+
+-- Completed on 2020-04-19 14:00:00
+
+--
+-- PostgreSQL database dump complete
+--
+
+
+
+
+
+
+
 
 ALTER TABLE ONLY daten.global_tmp ALTER COLUMN idpk SET DEFAULT nextval('daten.global_tmp_idpk_seq'::regclass);
 
