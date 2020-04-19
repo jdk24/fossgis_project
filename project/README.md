@@ -56,27 +56,48 @@ directly to the database views providing near real-time data.
     ```
 
 ## PostgreSQL database workflow
-Dependencies: PostgreSQL, GeoServer/GRASS GIS?
+Dependencies: PostgreSQL + PostGIS, GDAL (ogr2ogr) with PostgreSQL Driver, GRASS GIS
 
 1. Change to scripts folder (if you are not already there)
     ```bash
     project/scripts
     ```
-1. Run database setup script
+1. Run database setup script in PostgreSQL instance
     ```bash
     psql 0_db_setup.sql
     ```
-1. Start cron jobs to download lubw & luftdaten data
+    This sets up the table structure, functions and views.
+    GRASS GIS can be connected directly to the views, e.g:
+    
+    > db.connect driver=pg database=luftdaten  
+    > db.login user=postgres pass=postgres port=5430  
+    > db.connect -p  
+    > db.tables -p  
+    > 
+    > v.in.ogr input="PG:host=localhost  
+    >     dbname=luftdaten    
+    >     user=postgres  
+    >     password=postgres  
+    >     port=5430"  
+    >     layer=daten.luftdaten_pm10_filtered  
+    >     output=luftdaten_pm10_latest  
+    
+    Alternatively, a GeoJSON can be exported for each view,  
+    using the database function `daten.get_get_geojson(name_of_view)`. 
+    
+1. Add download scripts for lubw & luftdaten data to hourly crontab  
     ```bash
-    # Julian more info pls :D
     sh 1_1_dl_lubw.sh
     sh 1_2_dl_luftdaten.sh
     ```
-1. (Fill database with values from january if needed
+    Make sure to adjust the the port, user and password according to your database instance.  
+    `1_1_dl_lubw.sh` expects an installation of GDAL with PostgreSQL drivers in `C:\OSGeo4W64\OSGeo4W.bat`.   
+    The scripts will store the downloaded files in their own directory. Disk usage ~ 5MB / day.  
+    
+1. (Fill database with values from january if needed)
     ```bash
     psql luftdaten_backup.sql
     ```
-    )
 
 ## Interpolation workflow
 Dependencies: Python 3, GRASS GIS
