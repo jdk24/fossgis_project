@@ -60,7 +60,7 @@ Dependencies: PostgreSQL + PostGIS, GDAL (ogr2ogr) with PostgreSQL Driver, GRASS
 
 1. Change to scripts folder (if you are not already there)
     ```bash
-    project/scripts
+    cd project/scripts
     ```
 1. Run database setup script in PostgreSQL instance
     ```bash
@@ -137,7 +137,7 @@ You can now either
 Afterwards:
 1. Change to scripts folder (if you are not already there)
     ```bash
-    project/scripts
+    cd project/scripts
     ```
 1. Run interpolation setup script
     ```bash
@@ -163,7 +163,7 @@ Dependencies: NodeJS
 
 1. change to webapp folder
     ```bash
-    project/webapp
+    cd project/webapp
     ```
 1. install webapp dependencies
     ```bash
