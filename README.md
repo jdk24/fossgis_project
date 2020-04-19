@@ -11,7 +11,7 @@ through particularly affected areas - is a step to-wards informing about - and p
 The study will thus concentrate on mapping air pollution within Stuttgart’s central districts _Nord, Süd, West, Ost, Mitte,
 Feuerbach, Botnang, Hedelfingen, Wangen, Münster_ and _Bad Cannstatt_ and additionally offer a basic routing service for cyclists.
 
-For instructions on how to reproduce this study are documented in the [project readme](project/README.md).
+For instructions on how to reproduce this study visit the [project readme](project/README.md).
 
 The [proposal](proposal/Proposal.pdf) as well as the [presentation](presentation/gis.pdf) are deprecated
 because the analysis workflow was enhanced and adjusted.
