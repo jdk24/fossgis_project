@@ -16,4 +16,6 @@ For instructions on how to reproduce this study are documented in the [project r
 The [proposal](proposal/Proposal.pdf) as well as the [presentation](presentation/gis.pdf) are deprecated
 because the analysis workflow was enhanced and adjusted.
 
+The updated workflow was visualized in a [diagram](report/workflow.png).
+
 Results of the analysis are discussed in a [scientific report](report/report.pdf).
