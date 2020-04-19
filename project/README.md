@@ -18,7 +18,9 @@ directly to the database views providing near real-time data.
 - [NodeJS](https://nodejs.org/en/) (used: 12.11.1, or use [NVM](https://github.com/nvm-sh/nvm))
 - [Python 3](https://www.python.org/downloads/) (used: 3.6.8)
 - [GRASS GIS](https://grass.osgeo.org/download/) (used: 7.7.svn, Python: 2.7.15, wxPython: 4.0.4)
-- [PostgreSQL](https://www.postgresql.org/download/) (used: used 11.5)
+- [PostgreSQL](https://www.postgresql.org/download/) (used: 11.5)
+- [PostGIS](https://postgis.net/install/) (used: 2.5)
+- [GDAL](https://postgis.net/install/) (used: 2.4.2)
 - ([GeoServer](http://geoserver.org/download/) (not used due to technical issues))
 
 
