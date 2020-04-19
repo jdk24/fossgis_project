@@ -85,11 +85,12 @@ Dependencies: PostgreSQL + PostGIS, GDAL (ogr2ogr) with PostgreSQL Driver, GRASS
     Alternatively, a GeoJSON can be exported for each view,  
     using the database function `daten.get_get_geojson(name_of_view)`. 
     
-1. Add download scripts for lubw & luftdaten data to hourly crontab  
+1. Run download scripts for lubw & luftdaten data  
     ```bash
     sh 1_1_dl_lubw.sh
     sh 1_2_dl_luftdaten.sh
     ```
+    Due to the short running time, the scripts use a `sleep` statement to run every hour for ease of use on Windows. Alternatively, remove the statement and add to hourly crontab.   
     Make sure to adjust the the port, user and password according to your database instance.  
     `1_1_dl_lubw.sh` expects an installation of GDAL with PostgreSQL drivers in `C:\OSGeo4W64\OSGeo4W.bat`.   
     The scripts will store the downloaded files in their own directory. Disk usage ~ 5MB / day.  
